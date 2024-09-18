@@ -22,7 +22,7 @@ const ModalProvider = ({ children }) => {
             {isShow && <div className='fixed inset-0 z-10'>
                 <div className='absolute bg-slate-600/60 inset-0 flex items-center justify-center' onClick={() => setisShow(false)}>
                     <div className='z-20' onClick={(e) => e.stopPropagation()}>
-                        <Login />
+                        {content}
                     </div>
                 </div>
 
