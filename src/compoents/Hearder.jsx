@@ -1,34 +1,31 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
-
-const Hearder = props => {
-    return (
-        <header className="flex h-14 lg:h-20 items-center justify-between bg-slate-950 px-8 text-white w-full">
-            <div className="flex items-center gap-4">
-                <Link to="/">
-                    Logo
-                </Link >
-                <Link to="/acb">
-                    ABC
-                </Link >
-                <Link to="/def">
-                    DEF
-                </Link >
-
-                <a href="">ĐÂY LÀ HEADER</a>
+import React from "react";
+import "./header/headers.scss";
+import logo from "../image/logovivu.webp";
+const Hearder = (props) => {
+  return (
+    <header className="wrapper">
+        <div className="logo">
+          <img src={logo} alt="" />
+        </div>
+      <div className="inner-flex">
+        <div className="menu">
+          <li className="list">Find a Cruise</li>
+          <li className="list">Find Flights</li>
+          <li className="list">About us</li>
+        </div>
+        <div className="user">
+            <div className="login">
+                <button>Login</button>
             </div>
-            <div>
-                <FontAwesomeIcon
-                    icon={faMagnifyingGlass}
-                    className="cursor-pointer"
-                />
+            <div className="register">
+                <button>Register</button>
             </div>
-        </header>
-    )
-}
+        </div>
+      </div>
+    </header>
+  );
+};
 
-Hearder.propTypes = {}
+Hearder.propTypes = {};
 
-export default Hearder
+export default Hearder;
