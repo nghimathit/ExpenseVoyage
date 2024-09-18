@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./header/headers.scss";
 import logo from "../image/logovivu.webp";
-const Hearder = (props) => {
+import { ModalContext } from "@Context/ModalProvider";
+const Hearder = () => {
+  const { setisShow } = useContext(ModalContext)
   return (
     <div>
       <header className="wrapper">
@@ -24,7 +26,7 @@ const Hearder = (props) => {
                 <option value="GBP">GBP</option>
               </select>
             </div>
-            <div className="login">
+            <div className="login" onClick={() => setisShow(true)}>
               <button>Login</button>
             </div>
             <div className="register">
