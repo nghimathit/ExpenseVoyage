@@ -1,5 +1,6 @@
 import TripManagement from "@compoents/TripManagement";
 import Trip from "@compoents/TripManagement/Trip";
+import banner from '../image/Mixivivuduthuyen.gif'
 
 function Home() {
   return (
@@ -9,7 +10,7 @@ function Home() {
     <div className="relative">
       <img
         className="w-full brightness-50"
-        src="https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        src={banner}
         alt="Background"
       />
       <div className="absolute inset-0 flex items-center justify-center text-white">
