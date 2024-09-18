@@ -10,9 +10,9 @@ function Home() {
         className="w-full brightness-50"
         src="https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         alt="Background"
-      />
+ />
       <div className="absolute inset-0 flex items-center justify-center text-white">
-        <div className="text-center">
+  <div className="text-center">
           <p className="text-[1.5vw]">WELCOME TO</p>
           <h1 className="text-[5vw] font-light">Expense Voyage</h1>
           <p className="text-[1.5vw] font-thin">Trip Planner</p>
