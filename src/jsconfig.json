@@ -4,7 +4,8 @@
     "paths": {
       "@compoents/*": ["src/compoents/*"],
       // "@libs/*": ["src/libs*"],
-      "@page/*": ["src/page*"]
+      "@page/*": ["src/page*"],
+      "@Context/*": ["src/Context*"]
       // "@hooks/*": ["src/hooks*"]
     }
   }
