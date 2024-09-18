@@ -3,7 +3,7 @@ import "./header/headers.scss";
 import logo from "../image/logovivu.webp";
 import { ModalContext } from "@Context/ModalProvider";
 import Login from "./Login";
-import Register from "./Register";
+import Register from "./Register"
 const Hearder = () => {
   const { setisShow, setContent } = useContext(ModalContext)
   return (
@@ -34,7 +34,7 @@ const Hearder = () => {
             }>
               <button className="w-full" >Login</button>
             </div>
-            <div className="register" onClick={() => { setisShow(true); setContent(<Register />) }} >
+            <div className="register" onClick={() =>{ setisShow(true); setContent(<Register/>)}} >
               <button>Register</button>
             </div>
             {/* <div className="avatar-username">

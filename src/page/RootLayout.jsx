@@ -6,12 +6,14 @@ import "../compoents/rootlayout/rootlayout.scss"
 const RootLayout = () => {
   return (
     <div>
-      <div className="w-full">
+      <div className="container">
         <Hearder /> {/*Các compont chung */}
         <div className="hiddenclass"></div>
       </div>
+      <div className="container p-[60px]">
       <Outlet /> {/*các component ở giữa */}
-      <div className="w-full">
+      </div>
+      <div className="container">
         <Footer /> {/*Các compont chung */}
       </div>
     </div>
