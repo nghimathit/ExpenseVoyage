@@ -1,4 +1,4 @@
-import HomeBanner from "@compoents/Home";
+import HomeBanner from "@compoents/HomeBanner";
 
 function Home() {
   return (

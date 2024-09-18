@@ -1,6 +1,6 @@
 import React from "react";
 import "./header/headers.scss";
-import logo from "../image/logovivu.webp";
+import logo from "../image/logo.jpeg";
 const Hearder = (props) => {
   return (
     <div>
