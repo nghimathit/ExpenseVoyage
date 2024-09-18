@@ -1,5 +1,11 @@
+import TripManagement from "@compoents/TripManagement";
+import Trip from "@compoents/TripManagement/Trip";
+
 function Home() {
   return (
+    <div>
+
+   
     <div className="relative">
       <img
         className="w-full brightness-50"
@@ -14,6 +20,15 @@ function Home() {
           <button className="mt-4 px-7 py-1 bg-white text-[#623E2A] text-[1.5vw] rounded">Get Started</button>
         </div>
       </div>
+    </div>
+    <TripManagement/>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-3">
+    <Trip/>
+    <Trip/>
+    <Trip/>
+    <Trip/>
+    <Trip/>
+    </div>
     </div>
   );
 }
