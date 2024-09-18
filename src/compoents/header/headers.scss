@@ -16,6 +16,8 @@ body {
   font-weight: 600;
   font-style: normal;
   font-variation-settings: "wdth" 100;
+  z-index: 2;
+  position: fixed;
   .logo {
     display: flex;
     width: 190px;
@@ -49,9 +51,10 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-right: 50px;
       gap: 40px;
       .currency{
-        width: 120px;
+        width: 100%;
         select{
           outline: none;
           width: 100%;

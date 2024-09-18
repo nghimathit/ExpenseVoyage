@@ -23,13 +23,13 @@ const Hearder = (props) => {
               <option value="GBP">GBP</option>
             </select>
           </div>
-          {/* <div className="login">
+          <div className="login">
             <button>Login</button>
           </div>
           <div className="register">
             <button>Register</button>
-          </div> */}
-          <div className="avatar-username">
+          </div>
+          {/* <div className="avatar-username">
             <div className="circle">
               <div className="avatar">
                 <img
@@ -39,9 +39,10 @@ const Hearder = (props) => {
               </div>
             </div>
             <div className="username">Van Nghi</div>
-          </div>
+          </div> */}
         </div>
       </div>
+
     </header>
   );
 };
