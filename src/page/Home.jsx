@@ -1,6 +1,4 @@
-import TripManagement from "@compoents/TripManagement";
-import Trip from "@compoents/TripManagement/Trip";
-import banner from '../image/Mixivivuduthuyen.gif'
+
 
 function Home() {
   return (
@@ -10,7 +8,7 @@ function Home() {
     <div className="relative">
       <img
         className="w-full brightness-50"
-        src={banner}
+        src="https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         alt="Background"
       />
       <div className="absolute inset-0 flex items-center justify-center text-white">
@@ -21,14 +19,6 @@ function Home() {
           <button className="mt-4 px-7 py-1 bg-white text-[#623E2A] text-[1.5vw] rounded">Get Started</button>
         </div>
       </div>
-    </div>
-    <TripManagement/>
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-3">
-    <Trip/>
-    <Trip/>
-    <Trip/>
-    <Trip/>
-    <Trip/>
     </div>
     </div>
   );
