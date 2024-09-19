@@ -15,7 +15,7 @@ const RootLayout = () => {
         <div className="hiddenclass"></div>
         {location.pathname === "/overview" && <Sidebar />}
       </div>
-      <div className="container p-[60px]">
+      <div className="container">
         <Outlet /> {/* Các component ở giữa */}
       </div>
       <div className="m-0 p-0">

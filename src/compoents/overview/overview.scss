@@ -33,3 +33,14 @@
 .blockquote:not(:empty)::before {
   display: none;
 }
+.four-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .css-1oz3td-MuiAutocomplete-root {
+    width: 100% !important;
+    height: 100%;
+}
