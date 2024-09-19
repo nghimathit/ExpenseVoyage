@@ -28,13 +28,11 @@ const Hearder = () => {
                 <option value="GBP">GBP</option>
               </select>
             </div>
-            <div className="login" onClick={() => { setContent(<Login />); setisShow(true) }
-
-
+            <div className="login" onClick={() => { setisShow(true); setContent(<Login />) }
             }>
               <button className="w-full" >Login</button>
             </div>
-            <div className="register" onClick={() =>{ setisShow(true); setContent(<Register/>)}} >
+            <div className="register" onClick={() => { setisShow(true); setContent(<Register />) }} >
               <button>Register</button>
             </div>
             {/* <div className="avatar-username">
