@@ -8,6 +8,8 @@ import HomePage from '@compoents/Home'
 import ModalProvider from '@Context/ModalProvider'
 import PlanStrip from '@compoents/PlanTrip'
 import Overview from '@compoents/overview'
+import Login from '@compoents/Login';
+import Register from '@compoents/Register'
 
 
 
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: "/overview",
         element: <Overview />
+      },
+      {
+        path: "/login",
+        element: <Login />
+      },
+      {
+        path: "/register",
+        element: <Register />
       },
 
     ]
