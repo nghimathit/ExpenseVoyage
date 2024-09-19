@@ -18,8 +18,8 @@ const RootLayout = () => {
       <div className="container p-[60px]">
         <Outlet /> {/* Các component ở giữa */}
       </div>
-      <div className="container m-0 p-0">
-        <Footer /> {/* Các component chung */}
+      <div className="m-0 p-0">
+        <Footer /> {/*Các compont chung */}
       </div>
     </div>
   );
