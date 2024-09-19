@@ -5,7 +5,7 @@ import { ModalContext } from "@Context/ModalProvider";
 import Login from "./Login";
 import Register from "./Register"
 const Hearder = () => {
-  const { setisShow } = useContext(ModalContext)
+  const { setisShow, setContent } = useContext(ModalContext)
   return (
     <div>
       <header className="wrapper">
