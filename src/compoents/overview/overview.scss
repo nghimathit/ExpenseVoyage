@@ -14,3 +14,22 @@
     transform: scale(1.2);
   }
 }
+.blockquote {
+  position: relative;
+  font-size: 14px;
+}
+
+.blockquote::before {
+  content: attr(data-placeholder);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #888;
+  pointer-events: none;
+  user-select: none;
+}
+
+.blockquote:focus::before,
+.blockquote:not(:empty)::before {
+  display: none;
+}
