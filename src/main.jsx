@@ -6,6 +6,8 @@ import Home from './page/Home.jsx'
 import RootLayout from './page/RootLayout'
 import HomePage from '@compoents/Home'
 import ModalProvider from '@Context/ModalProvider'
+import PlanStrip from '@compoents/PlanTrip'
+import Overview from '@compoents/overview'
 
 
 
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <HomePage />
+      },
+      {
+        path: "/plant/new",
+        element: <PlanStrip />
+      },
+      {
+        path: "/overview",
+        element: <Overview />
       },
 
     ]

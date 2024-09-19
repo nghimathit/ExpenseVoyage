@@ -1,14 +1,9 @@
 import React, { useContext } from "react";
 import "./header/headers.scss";
-<<<<<<< HEAD
 import logo from "../image/logo.jpeg";
-const Hearder = (props) => {
-=======
-import logo from "../image/logovivu.webp";
 import { ModalContext } from "@Context/ModalProvider";
 const Hearder = () => {
   const { setisShow } = useContext(ModalContext)
->>>>>>> b795e93689fdf3a97a8e3cb93bdaf42994b5198e
   return (
     <div>
       <header className="wrapper">
