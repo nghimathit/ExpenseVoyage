@@ -11,7 +11,7 @@ import PlanStrip from '@compoents/PlanTrip'
 import Overview from '@compoents/overview'
 import Login from '@compoents/Login';
 import Register from '@compoents/Register'
-import Test from 'compoents/test'
+import Test from '@compoents/test'
 
 
 
