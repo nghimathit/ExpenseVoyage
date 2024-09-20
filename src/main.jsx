@@ -4,12 +4,15 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './page/Home.jsx'
 import RootLayout from './page/RootLayout'
+import RootLayoutAdmin from './page/RootLayoutAdmin'
 import HomePage from '@compoents/Home'
 import ModalProvider from '@Context/ModalProvider'
 import PlanStrip from '@compoents/PlanTrip'
 import Overview from '@compoents/overview'
 import Login from '@compoents/Login';
 import Register from '@compoents/Register'
+import Test from 'compoents/test'
+
 
 
 
@@ -44,7 +47,16 @@ const router = createBrowserRouter([
       },
 
     ]
-  }
+  },
+  {
+    element: <RootLayoutAdmin />, // cấu hình các component Admin
+    children: [
+      {
+        path: "/admin",
+        element: <Test/>
+      },
+    ]
+  },
 ])
 createRoot(document.getElementById('root')).render(
   <ModalProvider >
