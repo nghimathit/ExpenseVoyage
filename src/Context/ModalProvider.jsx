@@ -1,34 +1,41 @@
-
-import Login from '@compoents/Login';
-import React, { createContext, useEffect, useState } from 'react'
+import Login from "@compoents/Login";
+import React, { createContext, useEffect, useState } from "react";
 
 export const ModalContext = createContext();
 
 const ModalProvider = ({ children }) => {
-    const [isShow, setisShow] = useState(false);
-    const [content, setContent] = useState();
-    //   không cho cuộn trang web 
-    useEffect(() => {
-        if (isShow) {
-            document.body.style.overflow = "hidden"
-        } else {
-            document.body.style.overflow = "scroll"
-        }
+  const [isShow, setisShow] = useState(false);
+  const [content, setContent] = useState();
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const saveStartDate = (e) =>{
+    setStartDate(e.target.value);
+  }
+  //   không cho cuộn trang web
+  useEffect(() => {
+    if (isShow) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
+  }, [isShow]);
+  return (
+    <ModalContext.Provider value={{ setisShow, setContent, startDate, endDate, setStartDate, setEndDate }}>
+      {children}
+      {isShow && (
+        <div className="fixed inset-0 z-10">
+          <div
+            className="absolute inset-0 flex items-center justify-center bg-slate-600/60"
+            onClick={() => setisShow(false)}
+          >
+            <div className="z-20" onClick={(e) => e.stopPropagation()}>
+              {content}
+            </div>
+          </div>
+        </div>
+      )}
+    </ModalContext.Provider>
+  );
+};
 
-    }, [isShow]);
-    return (
-        <ModalContext.Provider value={{ setisShow, setContent }}>
-            {children}
-            {isShow && <div className='fixed inset-0 z-10'>
-                <div className='absolute bg-slate-600/60 inset-0 flex items-center justify-center' onClick={() => setisShow(false)}>
-                    <div className='z-20' onClick={(e) => e.stopPropagation()}>
-                        {content}
-                    </div>
-                </div>
-
-            </div>}
-        </ModalContext.Provider>
-    )
-}
-
-export default ModalProvider
+export default ModalProvider;

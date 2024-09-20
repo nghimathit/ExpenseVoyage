@@ -12,9 +12,7 @@ const RootLayoutAdmin = () => {
     <div className="container">
       <Outlet /> {/* Các component ở giữa */}
     </div>
-    <div className="m-0 p-0">
-      <Footer /> {/*Các compont chung */}
-    </div>
+    
   </div>
   );
 };
