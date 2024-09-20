@@ -1,24 +1,13 @@
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ModalContext } from "@Context/ModalProvider";
 
 function Sidebar(props) {
   const [datatime, setDatatime] = useState([]);
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  const { startDate, endDate } = useContext(ModalContext);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5096/api/Trip")
-      .then((result) => {
-        console.log(result.data.data);
-        setDatatime(result.data.data);
-        setStartDate(result.data.data[0].startDate); 
-        setEndDate(result.data.data[0].endDate); 
-      })
-      .catch((error) => console.log(error));
-  }, []);
 
   // Hàm format ngày tháng thành "Tue 9/3"
   const formatDayMonth = (date) => {

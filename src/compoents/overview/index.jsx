@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { DatePicker, Space } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import theme from "../../image/Mixivivuduthuyen.gif";
 import dayjs from "dayjs";
+import { Autocomplete, TextField } from "@mui/material";
+
 import {
   faBed,
   faCar,
@@ -21,9 +23,10 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import Swiper from "swiper";
 import "swiper/css/autoplay";
-import { Autocomplete, TextField } from "@mui/material";
 import axios from "axios";
 import "./overview.scss";
+import Places from "./place";
+import { ModalContext } from "@Context/ModalProvider";
 const { RangePicker } = DatePicker;
 const fakedata = [
   {
@@ -50,44 +53,65 @@ const fakedata = [
 ];
 function Overview() {
   const swiperRef = useRef(null);
-  const [top100Films, settop100Films] = useState([]);
   const [datatime, setDatatime] = useState([]);
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+
   const [trip, setStrip] = useState([]);
-  const [choosetrip, setChooseTrip] = useState([]);
-  const [tripnote, setTripnote] = useState([]);
-  useEffect(() => {
-    console.log("choosetrip: " + tripnote);
+  const [showPopup, setShowPopup] = useState(false);
+  const [top100Films, settop100Films] = useState([]);
+  const [destination, setDestination] = useState([]);
+  const { setStartDate, setEndDate, startDate, endDate } = useContext(ModalContext);
 
-  }, [tripnote]);
-  useEffect(() => {
-    axios
-      .get("http://localhost:5096/api/Trip")
-      .then((result) => {
-        console.log(result.data.data);
-        setDatatime(result.data.data);
-        setStartDate(result.data.data[0].startDate);
-        setEndDate(result.data.data[0].endDate);
-      })
-      .catch((error) => console.log(error));
-  }, []);
 
-  const handleDateChange = (dates) => {
-    if (dates) {
-      setStartDate(dates[0].toISOString());
-      setEndDate(dates[1].toISOString());
-    } else {
-      setStartDate(null);
-      setEndDate(null);
-    }
-  };
   useEffect(() => {
     axios
       .get("https://provinces.open-api.vn/api/?depth=2")
       .then((result) => settop100Films(result.data))
       .catch((err) => console.error(err));
   }, []);
+  
+
+  
+  const formatDayMonth = (date) => {
+    const daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const monthsOfYear = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const day = daysOfWeek[date.getDay()]; // Lấy ngày trong tuần
+    const month = monthsOfYear[date.getMonth()]; // Tháng bắt đầu từ 0
+    const dayOfMonth = date.getDate(); // Lấy ngày trong tháng
+    return `${day}, ${month} ${dayOfMonth}th`;
+  };
+  const calculateDaysBetween = (start, end) => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const dates = [];
+
+    while (startDate <= endDate) {
+      dates.push(new Date(startDate)); // Thêm mỗi ngày vào mảng
+      startDate.setDate(startDate.getDate() + 1); // Tăng một ngày
+    }
+    return dates;
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:5096/api/Trip")
@@ -149,6 +173,20 @@ function Overview() {
       swiperInstance.destroy();
     };
   }, []);
+
+  const handleDateChange = (dates) => {
+    if (dates) {
+      setStartDate(dates[0]);
+      setEndDate(dates[1]);
+    } else {
+      setStartDate(null);
+      setEndDate(null);
+    }
+  };
+  useEffect(() => {
+    console.log(startDate ? dayjs(startDate).format("YYYY-MM-DD") : null);
+    console.log(endDate ? dayjs(endDate).format("YYYY-MM-DD") : null);
+  }, [startDate, endDate]);
   return (
     <div className="h-full w-full pl-52">
       <div className="relative mb-5 w-full bg-transparent">
@@ -178,10 +216,7 @@ function Overview() {
               >
                 <RangePicker
                   style={{ width: "100%" }}
-                  value={[
-                    startDate ? dayjs(startDate) : null,
-                    endDate ? dayjs(endDate) : null,
-                  ]}
+                 
                   onChange={handleDateChange}
                 />
               </Space>
@@ -293,106 +328,31 @@ function Overview() {
           </div>
 
           <div className="mb-4 w-full rounded-xl bg-[#f3f4f5] p-2">
-            <blockquote
-              contentEditable="true"
-              className="blockquote w-full outline-none"
-              data-placeholder="Write or paste anything here: how to get around, tips and tricks"
-            ></blockquote>
+            <textarea
+              className="blockquote w-full outline-none bg-transparent"
+              placeholder="Write or paste anything here: how to get around, tips and tricks"
+            ></textarea>
           </div>
         </div>
         <hr className="my-2" />
 
+        {/* place */}
+        {destination.length > 0 && <Places place={destination} />}
         <div className="w-full">
-          <div className="mb-2 flex justify-between">
-            <div className="text-[24px] font-extrabold">
-              <FontAwesomeIcon icon={faChevronDown} className="mr-4" />
-              <span>Places to visit</span>
-            </div>
-            <div className="text-[24px]">
-              <FontAwesomeIcon icon={faEllipsis} />
-            </div>
-          </div>
-          {/* trip */}
-          {trip.map((item, index) => (
-            <div className="my-3 grid grid-cols-3 gap-3" key={index}>
-              <div className="relative col-span-2 w-full rounded-xl bg-[#f3f4f5] p-4">
-                <div className="absolute left-[-10px] top-[-10px]">
-                  <FontAwesomeIcon
-                    icon={faLocationDot}
-                    className="text-[30px] text-[#3f52e3]"
-                  />
-                </div>
-                <div className="text-[22px] font-bold">{item.destination}</div>
-                <blockquote
-                  contentEditable="true"
-                  className="blockquote w-full outline-none"
-                  data-placeholder="Add notes, link, etc... here"
-                  onChange={(e) => setTripnote(e.target.value)}
-                >
-                  {item.note}
-                </blockquote>
-                <div className="four-lines w-full text-[14px] text-[#6c757d]">
-                  From the web: Vietnam is a Southeast Asian country known for
-                  its beaches, rivers, Buddhist pagodas and bustling cities.
-                  Hanoi, the capital, pays homage to the nation’s iconic
-                  Communist-era leader, Ho Chi Minh, via a huge marble
-                  mausoleum. Ho Chi Minh City (formerly Saigon) has French
-                  colonial landmarks, plus Vietnamese War history museums and
-                  the Củ Chi tunnels, used by Viet Cong soldiers.
-                </div>
-                <div className="my-2 flex w-full">
-                  <div className="mx-2 cursor-pointer text-[12px] text-[#6c757d]">
-                    <FontAwesomeIcon icon={faPaperclip} />
-                    <label className="ml-1" htmlFor="attach">
-                      Attach
-                    </label>
-                    <input type="file" id="attach" hidden />
-                  </div>
-
-                  {item.budget > 0 ? (
-                    <div className="cursor-pointer rounded-full bg-[#3f52e3]/20 px-2 text-[12px] text-[#3f52e3]">
-                      $60.00
-                    </div>
-                  ) : (
-                    <div className="cursor-pointer text-[12px] text-[#6c757d]">
-                      <FontAwesomeIcon icon={faDollar} />
-                      <span className="ml-1">Add cost</span>
-                    </div>
-                  )}
-                  <div className="mx-2 cursor-pointer text-[12px] text-[#6c757d]">
-                    <FontAwesomeIcon icon={faTrash} />
-                    <label className="ml-1" htmlFor="attach">
-                      Delete
-                    </label>
-                  </div>
-                </div>
-              </div>
-              {/* end trip */}
-              <div className="col-span-1">
-                <div className="h-40 w-full">
-                  <img
-                    className="h-full w-full rounded-xl object-cover"
-                    src="https://plus.unsplash.com/premium_photo-1691960159290-6f4ace6e6c4c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aGElMjBub2l8ZW58MHx8MHx8fDA%3D"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-          ))}
           <div className="mb-4 flex w-full items-center justify-center rounded-xl bg-[#f3f4f5] p-2">
             {/* <FontAwesomeIcon icon={faLocationDot} className="text-[#4255fd]" /> */}
             {/* <input
-              type="text"
-              className="h-full w-full bg-transparent p-2 text-[16px] outline-none"
-              placeholder="Add a place"
-            /> */}
+            type="text"
+            className="h-full w-full bg-transparent p-2 text-[16px] outline-none"
+            placeholder="Add a place"
+          /> */}
             <Autocomplete
               className="w-full bg-transparent"
               disablePortal
               options={top100Films.map((item) => item.name)}
               onChange={(event, newValue) => {
-                // Cập nhật giá trị được chọn vào state
-                setChooseTrip(newValue);
+                console.log(newValue);
+                setDestination(newValue);
               }}
               renderInput={(params) => (
                 <TextField {...params} label="Add a place" />
@@ -400,10 +360,80 @@ function Overview() {
             />
           </div>
         </div>
+        {/* end place */}
       </div>
       <hr className="my-4" />
-      <div className="flex w-full mb-3">
+      <div className="mb-3 flex w-full">
         <span className="text-[36px] font-extrabold">Itinerary</span>
+      </div>
+      <div className="list-none">
+        {startDate &&
+          endDate &&
+          calculateDaysBetween(startDate, endDate).map((date, index) => (
+            <li key={index} className="my-2">
+              <div className="text-[22px] font-black">
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  className="mr-3 text-[14px]"
+                />
+                {formatDayMonth(date)}
+              </div>
+              <div className="my-3 grid grid-cols-3 gap-3" key={index}>
+                <div className="relative col-span-2 w-full rounded-xl bg-[#f3f4f5] p-4">
+                  <div className="absolute left-[-10px] top-[-10px]">
+                    <FontAwesomeIcon
+                      icon={faLocationDot}
+                      className="text-[30px] text-[#3f52e3]"
+                    />
+                  </div>
+                  <div className="text-[22px] font-bold">Vietnam</div>
+                  <textarea
+                          className="blockquote w-full outline-none bg-transparent"
+                    placeholder="Add notes, link, etc... here"
+                  ></textarea>
+                  <div className="four-lines w-full text-[14px] text-[#6c757d]">
+                    From the web: Vietnam is a Southeast Asian country known for
+                    its beaches, rivers, Buddhist pagodas and bustling cities.
+                    Hanoi, the capital, pays homage to the nation’s iconic
+                    Communist-era leader, Ho Chi Minh, via a huge marble
+                    mausoleum. Ho Chi Minh City (formerly Saigon) has French
+                    colonial landmarks, plus Vietnamese War history museums and
+                    the Củ Chi tunnels, used by Viet Cong soldiers.
+                  </div>
+                  <div className="my-2 flex w-full">
+                    <div className="mx-2 cursor-pointer text-[12px] text-[#6c757d]">
+                      <FontAwesomeIcon icon={faPaperclip} />
+                      <label className="ml-1" htmlFor="attach">
+                        Attach
+                      </label>
+                      <input type="file" id="attach" hidden />
+                    </div>
+
+                    <div className="cursor-pointer text-[12px] text-[#6c757d]">
+                      <FontAwesomeIcon icon={faDollar} />
+                      <span className="ml-1">Add cost</span>
+                    </div>
+                    <div className="mx-2 cursor-pointer text-[12px] text-[#6c757d]">
+                      <FontAwesomeIcon icon={faTrash} />
+                      <label className="ml-1" htmlFor="attach">
+                        Delete
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                {/* end trip */}
+                <div className="col-span-1">
+                  <div className="h-40 w-full">
+                    <img
+                      className="h-full w-full rounded-xl object-cover"
+                      src="https://plus.unsplash.com/premium_photo-1691960159290-6f4ace6e6c4c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aGElMjBub2l8ZW58MHx8MHx8fDA%3D"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
       </div>
     </div>
   );
