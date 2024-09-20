@@ -1,5 +1,7 @@
 import Loaing from '@compoents/Loaing';
 import React, { useState } from 'react';
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -34,9 +36,99 @@ const Login = () => {
             setLoading(false);
         }
     };
-    if(loading){
-        return <Loaing/>
+    if (loading) {
+        return <Loaing />
     }
+    const handleLoginSuccess = async (response) => {
+        try {
+          const decoded = jwtDecode(response.credential);
+          console.log("Đăng nhập thành công:", decoded);
+          // kiểm tra email đã có trong db chưa mới cho đăng ký và login
+          // còn có rồi thì login không thôi
+          const checkEmailGoogle = await fetch(
+            "http://localhost:5096/api/Auth/check-email-exists",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: decoded.email,
+              }),
+            }
+          );
+          const checkEmailGoogleData = await checkEmailGoogle.json();
+          console.log("check có hay chưa", checkEmailGoogleData.exists);
+          if (checkEmailGoogleData.exists === true) {
+            setError("Email already exists");
+          }
+          if (checkEmailGoogleData.exists === false) {
+            // Đăng ký tài khoản
+            const registerResponse = await fetch(
+              "http://localhost:5096/api/Auth/register",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  username: decoded.name,
+                  email: decoded.email,
+                  password: "aaa",
+                  role:"1",
+                  avatar: decoded.picture,
+                }),
+              }
+            );
+    
+            if (!registerResponse.ok) {
+              throw new Error("Đăng ký không thành công");
+            }
+    
+            const registerData = await registerResponse.json();
+            console.log("Đăng ký thành công:", registerData);
+          }
+    
+          //     // Đăng nhập tài khoản
+          const loginResponse = await fetch(
+            "http://localhost:5096/api/Auth/login",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: decoded.email,
+                password: "aaa",
+              }),
+            }
+          );
+    
+          if (!loginResponse.ok) {
+            throw new Error("Đăng nhập không thành công");
+          }
+    
+          const loginData = await loginResponse.json();
+          console.log("Đăng nhập thành công:", loginData);
+    
+          const DataLogin = {
+            Id: loginData.data.id,
+            Username: loginData.data.username,
+            Role: loginData.data.role,
+            avatar: decoded.picture,
+          };
+    
+    console.log("DataLogin",DataLogin)
+        
+        
+        } catch (error) {
+          console.error("Lỗi:", error);
+        }
+      };
+    
+      const handleLoginFailure = (error) => {
+        console.log("Login Failure:", error);
+      };
 
     return (
         <div className="flex items-center bg-gray-100 lg:justify-center rounded-lg">
@@ -113,7 +205,11 @@ const Login = () => {
                                 {/* Social login buttons go here */}
                                 <a href="#" className="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-gray-800 rounded-md group hover:bg-gray-800 focus:outline-none">
                                     {/* Github Icon */}
-                                    <span className="text-gray-800">Github</span>
+                                    <span className="text-gray-800">
+                                        <GoogleLogin
+                                            onSuccess={handleLoginSuccess}
+                                            onError={handleLoginFailure}
+                                        /></span>
                                 </a>
                                 <a href="#" className="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-blue-500 rounded-md group hover:bg-blue-500 focus:outline-none">
                                     {/* Twitter Icon */}
