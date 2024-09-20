@@ -13,6 +13,8 @@ import Login from '@compoents/Login';
 import Register from '@compoents/Register'
 import Test from '@compoents/test'
 import { BrowserRouter } from 'react-router-dom';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 
 
 
@@ -59,9 +61,12 @@ const router = createBrowserRouter([
     ]
   },
 ])
+const clientId ='902729761307-c9kib0ukl904i7la1s81hh1201e4ch6t.apps.googleusercontent.com';
 createRoot(document.getElementById('root')).render(
   <ModalProvider >
+    <GoogleOAuthProvider clientId={clientId}>
       <RouterProvider router={router} />
+      </GoogleOAuthProvider>
   </ModalProvider>
 
 
