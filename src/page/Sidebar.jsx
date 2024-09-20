@@ -1,11 +1,53 @@
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 function Sidebar(props) {
+  const [datatime, setDatatime] = useState([]);
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5096/api/Trip")
+      .then((result) => {
+        console.log(result.data.data);
+        setDatatime(result.data.data);
+        setStartDate(result.data.data[0].startDate); 
+        setEndDate(result.data.data[0].endDate); 
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  // Hàm format ngày tháng thành "Tue 9/3"
+  const formatDayMonth = (date) => {
+    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const day = daysOfWeek[date.getDay()]; // Lấy ngày trong tuần
+    const month = date.getMonth() + 1; // Tháng bắt đầu từ 0
+    const dayOfMonth = date.getDate(); // Lấy ngày trong tháng
+    return `${day} ${month}/${dayOfMonth}`;
+  };
+  useEffect(() => {
+    console.log()
+  })
+  // Hàm tính chuỗi ngày giữa startDate và endDate
+  const calculateDaysBetween = (start, end) => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const dates = [];
+
+    // Duyệt qua từng ngày từ startDate đến endDate
+    while (startDate <= endDate) {
+      dates.push(new Date(startDate)); // Thêm mỗi ngày vào mảng
+      startDate.setDate(startDate.getDate() + 1); // Tăng một ngày
+    }
+    return dates;
+  };
+
   return (
     <div>
-      <div className="fixed h-screen w-48 border-[1px] border-solid border-r-[#cfcfcf] bg-[#fff] p-3 z-10">
+      <div className="fixed z-10 h-screen w-48 border-[1px] border-solid border-r-[#cfcfcf] bg-[#fff] p-3 overflow-auto">
         <div className="cursor-pointer rounded-lg bg-[#212529] p-2 text-[18px] font-extrabold text-[#fff]">
           <FontAwesomeIcon icon={faChevronDown} />{" "}
           <span className="pl-2">OverView</span>
@@ -20,9 +62,12 @@ function Sidebar(props) {
           <span className="pl-2">Itinerary</span>
         </div>
         <div className="menu my-2 list-none pl-3">
-          <li className="my-2">Tue 9/3</li>
-          <li className="my-2">Wed 9/4</li>
-          <li className="my-2">Thu 9/5</li>
+          {startDate && endDate && 
+            calculateDaysBetween(startDate, endDate).map((date, index) => (
+              <li key={index} className="my-2">
+                {formatDayMonth(date)}
+              </li>
+            ))}
         </div>
       </div>
     </div>
