@@ -8,9 +8,17 @@ const ModalProvider = ({ children }) => {
   const [content, setContent] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-  const saveStartDate = (e) =>{
-    setStartDate(e.target.value);
-  }
+  const [countries, setCountries] = useState();
+  const [typeCurreny, setTypeCurreny] = useState("$");
+  const [originalMoney] = useState(500000);
+  const [onPriceChange, setonPriceChange] = useState();
+  const [initialPrice, setInitialPrice] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
+  useEffect(() => {
+    if (onPriceChange) {
+      setTotalPrice((prevTotal) => prevTotal + onPriceChange);
+    }
+  }, [onPriceChange]);
   //   không cho cuộn trang web
   useEffect(() => {
     if (isShow) {
@@ -20,7 +28,27 @@ const ModalProvider = ({ children }) => {
     }
   }, [isShow]);
   return (
-    <ModalContext.Provider value={{ setisShow, setContent, startDate, endDate, setStartDate, setEndDate }}>
+    <ModalContext.Provider
+      value={{
+        setisShow,
+        setContent,
+        startDate,
+        endDate,
+        setStartDate,
+        setEndDate,
+        countries,
+        setCountries,
+        typeCurreny,
+        setTypeCurreny,
+        originalMoney,
+        onPriceChange,
+        setInitialPrice,
+        totalPrice,
+        setonPriceChange,
+        initialPrice,
+        setTotalPrice,
+      }}
+    >
       {children}
       {isShow && (
         <div className="fixed inset-0 z-10">
