@@ -12,6 +12,7 @@ import Overview from '@compoents/overview'
 import Login from '@compoents/Login';
 import Register from '@compoents/Register'
 import Test from '@compoents/test'
+import { BrowserRouter } from 'react-router-dom';
 
 
 
@@ -53,14 +54,14 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/admin",
-        element: <Test/>
+        element: <Test />
       },
     ]
   },
 ])
 createRoot(document.getElementById('root')).render(
   <ModalProvider >
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
   </ModalProvider>
 
 
