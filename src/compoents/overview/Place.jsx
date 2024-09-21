@@ -23,9 +23,10 @@ function Places({ place, url }) {
     setTotalPrice,
     typeCurreny,
     setInitialPrice,
+    onPriceChange
   } = useContext(ModalContext);
   const [tripnote, setTripnote] = useState([]);
-  const [tempPrice, setTempPrice] = useState("");
+  const [tempPrice, setTempPrice] = useState();
   const [image, setImage] = useState(url);
 
   //   useEffect(() => {
@@ -55,10 +56,10 @@ function Places({ place, url }) {
   };
 
   useEffect(() => {
-    if (price) {
-      setTotalPrice(price);
+    if (onPriceChange) {
+      setTotalPrice(Number(onPriceChange)); 
     }
-  }, [price, setTotalPrice]);
+  }, [onPriceChange]);
   const togglePopup = () => {
     const popup = document.getElementById(`${place}-id`);
     if (popup) {
@@ -99,6 +100,8 @@ function Places({ place, url }) {
   };
   const handleSave = () => {
     setPrice(tempPrice);
+    setonPriceChange(Number(tempPrice));
+
     setInitialPrice(tempPrice);
     togglePopup();
   };
