@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBed, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import mivivu from "../../image/Mixivivuduthuyen.gif";
 const { RangePicker } = DatePicker;
 
 function HomePage() {
@@ -66,32 +66,40 @@ function HomePage() {
         </Link>
       </div>
       {/* start */}
-      {trip.length > 0 ? (
-        <div className="grid my-2 w-full grid-cols-4 gap-2">
-          <div className="col-span-1">
-            <div className=" w-full">
-              <div className="h-52 w-full">
-                <img
-                  src="https://itin-dev.sfo2.cdn.digitaloceanspaces.com/freeImageSmall/CUghmgKAUxRUCJ1VGYKbp63LCCEro9td"
-                  className="h-full w-full rounded-lg object-cover"
-                  alt="city"
-                />
+      <div className="my-2 grid w-full grid-cols-4 gap-2">
+        {trip.length > 0 ? (
+          trip.map((item, index) => (
+            <Link to={`/overview/${item.id}`} key={index}>
+              <div className="col-span-1" >
+                <div className="w-full">
+                  <div className="h-52 w-full">
+                    <img
+                      src={item.url ? item.url : mivivu}
+                      className="h-full w-full rounded-lg object-cover"
+                      alt="city"
+                    />
+                  </div>
+                  <div className="w-full p-2">
+                    <span className="block text-[18px]">
+                      Trip to {item.destination}
+                    </span>
+                    <span className="my-2 block w-full text-[#c1c1c2]">
+                      October 1-5
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div className="w-full p-2">
-                <span className="block text-[18px]">Trip to vietnam</span>
-                <span className="block my-2 w-full text-[#c1c1c2]">October 1-5</span>
-              </div>
-            </div>
+            </Link>
+          ))
+        ) : (
+          <div className="container-recently">
+            <span>
+              You haven’t created anything yet.{" "}
+              <span className="font-bold text-[#F75940]">Plan a new trip</span>.
+            </span>
           </div>
-        </div>
-      ) : (
-        <div className="container-recently">
-          <span>
-            You haven’t created anything yet.{" "}
-            <span className="font-bold text-[#F75940]">Plan a new trip</span>.
-          </span>
-        </div>
-      )}
+        )}
+      </div>
       {/* end */}
       <div className="container-place relative mt-4 w-full pb-6 pt-6">
         <div className="text-[25px] font-extrabold">Need a place to stay?</div>

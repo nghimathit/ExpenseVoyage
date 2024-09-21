@@ -10,7 +10,6 @@ const ModalProvider = ({ children }) => {
   const [endDate, setEndDate] = useState();
   const [countries, setCountries] = useState();
   const [typeCurreny, setTypeCurreny] = useState("$");
-  const [originalMoney] = useState(500000);
   const [onPriceChange, setonPriceChange] = useState();
   const [initialPrice, setInitialPrice] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
@@ -40,7 +39,6 @@ const ModalProvider = ({ children }) => {
         setCountries,
         typeCurreny,
         setTypeCurreny,
-        originalMoney,
         onPriceChange,
         setInitialPrice,
         totalPrice,

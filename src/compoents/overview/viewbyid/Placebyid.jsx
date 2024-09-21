@@ -14,7 +14,7 @@ import axios from "axios";
 import { ModalContext } from "@Context/ModalProvider";
 import dayjs from "dayjs";
 
-function Places({ place, url }) {
+function PlaceByid({ place, url }) {
   const [price, setPrice] = useState("");
   const {
     startDate,
@@ -27,6 +27,8 @@ function Places({ place, url }) {
   const [tripnote, setTripnote] = useState([]);
   const [tempPrice, setTempPrice] = useState("");
   const [image, setImage] = useState(url);
+  const [tripdata, setTripdata] = useState([]);
+  const {tripid} = useParams("tripid");
 
   //   useEffect(() => {
   //     axios
@@ -38,7 +40,15 @@ function Places({ place, url }) {
   //       })
   //       .catch((error) => console.log(error));
   //   }, []);
-
+  useEffect(() =>{
+    const id = parseInt(tripid)
+    axios.get(`http://localhost:5096/api/Trip/${id}`)
+    .then(result => {
+      console.log(result.data.data)
+      setTripdata(result.data.data)
+    })
+    .catch(err => console.log(err))
+  }, [tripid])
   useEffect(() => {
     console.log(startDate ? dayjs(startDate).format("YYYY-MM-DD") : null);
     console.log(endDate ? dayjs(endDate).format("YYYY-MM-DD") : null);
@@ -232,4 +242,4 @@ function Places({ place, url }) {
   );
 }
 
-export default Places;
+export default PlaceByid;

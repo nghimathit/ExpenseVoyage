@@ -12,6 +12,7 @@ import Overview from '@compoents/overview'
 import Login from '@compoents/Login';
 import Register from '@compoents/Register'
 import Test from '@compoents/test'
+import Viewbyid from '@compoents/overview/viewbyid'
 
 
 
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />
+      },
+      {
+        path: "/overview/:tripid",
+        element: <Viewbyid />
       },
 
     ]
