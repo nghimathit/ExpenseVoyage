@@ -75,9 +75,7 @@ const RegisterUser = ({ email }) => {
     
             const data = await response.json();
             console.log(data); // Handle response as needed
-            
-           
-            //navigate('/login');
+            location.href="/login";
     
         } catch (error) {
             console.error('Error sending request:', error);

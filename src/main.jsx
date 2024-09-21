@@ -19,8 +19,6 @@ import TourList from '@compoents/Admin/TourList'
 import AddTour from '@compoents/Admin/AddTour'
 import Edit from '@compoents/Admin/TourList/Edit'
 import TripList from '@compoents/Admin/TripList'
-
-// import { GoogleOAuthProvider } from '@react-oauth/google';
 import ForgotPassword from '@compoents/Login/ForgotPassword'
 
 

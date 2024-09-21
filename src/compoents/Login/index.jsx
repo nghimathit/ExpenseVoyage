@@ -31,6 +31,7 @@ const Login = () => {
             const data = await response.json();
             // Handle successful login (e.g., store token, redirect, etc.)
             console.log('Login successful!', data);
+            location.href="/";
         } catch (error) {
             setError(error.message);
         } finally {
@@ -107,9 +108,11 @@ const Login = () => {
     
           if (!loginResponse.ok) {
             throw new Error("Đăng nhập không thành công");
+          
           }
     
           const loginData = await loginResponse.json();
+          location.href="/";
           console.log("Đăng nhập thành công:", loginData);
     
           const DataLogin = {
