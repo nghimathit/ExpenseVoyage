@@ -11,7 +11,7 @@ const Footer = () => {
             <footer className='footer'>
                 <div className='container'>
                     <div className='Footer'>
-                        <div class="d-none d-sm-flex row">
+                        <div className="d-none d-sm-flex row">
                             <div className='col-sm-3'>
                                 Made With ❤ in SF & more<br></br>
                                 © 2024 Travelchime Inc.

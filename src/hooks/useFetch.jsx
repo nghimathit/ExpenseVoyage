@@ -1,8 +1,7 @@
 
 import { useEffect, useState } from "react";
 const DEFAULT_HEADERS = {
-    accept: "application/json",
-    Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`
+    accept: "application/json"
 }
 
 export default function useFetch({ url = '', method = "GET", headers = {} }) {
@@ -11,7 +10,7 @@ export default function useFetch({ url = '', method = "GET", headers = {} }) {
     useEffect(() => {
         setIsLoaing(true);
         fetch(
-            `${import.meta.env.VITE_API_HOST}${url}`, {
+            url, {
             method: method,
             headers: {
                 ...DEFAULT_HEADERS,

@@ -14,13 +14,19 @@ import axios from "axios";
 import { ModalContext } from "@Context/ModalProvider";
 import dayjs from "dayjs";
 
-function Places({ place }) {
+function Places({ place, url }) {
   const [price, setPrice] = useState("");
-  const { startDate, endDate } = useContext(ModalContext);
+  const {
+    startDate,
+    endDate,
+    setonPriceChange,
+    setTotalPrice,
+    typeCurreny,
+    setInitialPrice,
+  } = useContext(ModalContext);
   const [tripnote, setTripnote] = useState([]);
-  const [image, setImage] = useState(
-    "https://plus.unsplash.com/premium_photo-1691960159290-6f4ace6e6c4c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aGElMjBub2l8ZW58MHx8MHx8fDA%3D",
-  );
+  const [tempPrice, setTempPrice] = useState("");
+  const [image, setImage] = useState(url);
 
   //   useEffect(() => {
   //     axios
@@ -32,6 +38,7 @@ function Places({ place }) {
   //       })
   //       .catch((error) => console.log(error));
   //   }, []);
+
   useEffect(() => {
     console.log(startDate ? dayjs(startDate).format("YYYY-MM-DD") : null);
     console.log(endDate ? dayjs(endDate).format("YYYY-MM-DD") : null);
@@ -46,20 +53,21 @@ function Places({ place }) {
     file.preview = URL.createObjectURL(file);
     setImage(file);
   };
-  useEffect(() => {});
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setPrice(value);
-  };
+
+  useEffect(() => {
+    if (price) {
+      setTotalPrice(price);
+    }
+  }, [price, setTotalPrice]);
   const togglePopup = () => {
-    const popup = document.getElementById("popup");
+    const popup = document.getElementById(`${place}-id`);
     if (popup) {
       popup.classList.toggle("block");
       popup.style.display = popup.style.display === "none" ? "block" : "none";
     }
   };
-  const togglePopupSave = () => {
-    const popup = document.getElementById("popupsave");
+  const togglePopupSave = (place) => {
+    const popup = document.getElementById(`${place}`);
     if (popup) {
       popup.classList.toggle("block");
       popup.style.display = popup.style.display === "none" ? "block" : "none";
@@ -79,12 +87,21 @@ function Places({ place }) {
     axios
       .post(`http://localhost:5096/api/Trip`, data, {
         headers: {
-          "Content-Type": "application/json", // Đảm bảo đúng định dạng
+          "Content-Type": "application/json",
         },
       })
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
   };
+  const handleChange = (e) => {
+    setTempPrice(e.target.value);
+  };
+  const handleSave = () => {
+    setPrice(tempPrice);
+    setInitialPrice(tempPrice);
+    togglePopup();
+  };
+
   return (
     <div className="w-full">
       <form method="POST" onSubmit={handleSubmit}>
@@ -93,15 +110,14 @@ function Places({ place }) {
             <FontAwesomeIcon icon={faChevronDown} className="mr-4" />
             <span>Places to visit</span>
           </div>
-          <div className="relative text-[24px]">
-            <FontAwesomeIcon
-              icon={faEllipsis}
-              onClick={togglePopupSave}
-              className="cursor-pointer"
-            />
+          <div
+            className="relative cursor-pointer px-4 text-[24px]"
+            onClick={() => togglePopupSave(place)}
+          >
+            <FontAwesomeIcon icon={faEllipsis} />
             <div
               className="absolute right-0 top-[25px] hidden w-28 rounded-xl border-[1px] border-solid border-[#f3f4f5] bg-[#fff] shadow-xl"
-              id="popupsave"
+              id={`${place}`}
             >
               <button
                 type="submit"
@@ -154,7 +170,8 @@ function Places({ place }) {
                     className="rounded-full bg-[#3f52e3]/20 px-2 text-[12px] text-[#3f52e3]"
                     onClick={togglePopup}
                   >
-                    ${price}
+                    $
+                    {price}
                   </div>
                 ) : (
                   <div
@@ -166,7 +183,7 @@ function Places({ place }) {
                   </div>
                 )}
                 <div
-                  id="popup"
+                  id={`${place}-id`}
                   className="absolute left-0 top-full z-10 mt-2 hidden w-48 rounded-lg bg-white p-2 shadow-lg"
                 >
                   <div className="w-full border-[1px] border-solid border-[#f3f4f5]">
@@ -175,13 +192,14 @@ function Places({ place }) {
                       type="number"
                       placeholder="Enter price"
                       prefix={<DollarOutlined />}
-                      value={price}
+                      value={tempPrice}
                       className="text-[12px]"
                       onChange={handleChange}
                     />
                   </div>
                   <button
-                    onClick={togglePopup}
+                    onClick={handleSave}
+                    type="button"
                     className="float-right mt-2 rounded-full bg-[#f75940] p-2 px-4 text-[#fff]"
                   >
                     Save

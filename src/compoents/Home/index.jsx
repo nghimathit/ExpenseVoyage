@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./homepage.scss";
 import { DatePicker, Space } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBed, faUser } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const { RangePicker } = DatePicker;
 
@@ -10,7 +12,19 @@ function HomePage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [rooms, setRooms] = useState(1);
   const [guests, setGuests] = useState(1);
+  const [userid, setUserid] = useState(1);
+  const [trip, setTrip] = useState([]);
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:5096/api/Trip")
+      .then((result) => {
+        console.log(result.data.data.filter((c) => c.userId === userid));
+        const data = result.data.data.filter((c) => c.userId === userid);
+        setTrip(data);
+      })
+      .catch((err) => console.error(err));
+  }, [userid]);
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -45,16 +59,40 @@ function HomePage() {
         <div className="text-[26px] font-medium">
           Recently viewed and upcoming
         </div>
-        <div className="button-trip flex items-center">
-          <button>+ Plan new trip</button>
+        <Link to={"/plant/new"}>
+          <div className="button-trip flex items-center">
+            <button>+ Plan new trip</button>
+          </div>
+        </Link>
+      </div>
+      {/* start */}
+      {trip.length > 0 ? (
+        <div className="grid my-2 w-full grid-cols-4 gap-2">
+          <div className="col-span-1">
+            <div className=" w-full">
+              <div className="h-52 w-full">
+                <img
+                  src="https://itin-dev.sfo2.cdn.digitaloceanspaces.com/freeImageSmall/CUghmgKAUxRUCJ1VGYKbp63LCCEro9td"
+                  className="h-full w-full rounded-lg object-cover"
+                  alt="city"
+                />
+              </div>
+              <div className="w-full p-2">
+                <span className="block text-[18px]">Trip to vietnam</span>
+                <span className="block my-2 w-full text-[#c1c1c2]">October 1-5</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="container-recently">
-        <span>
-          You haven’t created anything yet.{" "}
-          <span className="font-bold text-[#F75940]">Plan a new trip</span>.
-        </span>
-      </div>
+      ) : (
+        <div className="container-recently">
+          <span>
+            You haven’t created anything yet.{" "}
+            <span className="font-bold text-[#F75940]">Plan a new trip</span>.
+          </span>
+        </div>
+      )}
+      {/* end */}
       <div className="container-place relative mt-4 w-full pb-6 pt-6">
         <div className="text-[25px] font-extrabold">Need a place to stay?</div>
         <div className="flex gap-2">
@@ -155,7 +193,7 @@ function HomePage() {
       </div>
       <div className="container-trip grid grid-cols-2 gap-2">
         <div className="col-span-1">
-          <div className="h-36 w-full rounded-lg bg-[#f3f4f5] px-6 py-4">
+          <div className="w-full rounded-lg bg-[#f3f4f5] px-6 py-4">
             <div className="mb-5 flex items-center justify-between">
               <span className="text-[24px] font-bold">Your strips</span>
               <button className="flex items-center rounded-full bg-[#E9ECEF] px-6 py-2 text-[14px] font-semibold">
@@ -169,7 +207,7 @@ function HomePage() {
           </div>
         </div>
         <div className="col-span-1">
-          <div className="h-36 w-full rounded-lg bg-[#f3f4f5] px-6 py-4">
+          <div className="w-full rounded-lg bg-[#f3f4f5] px-6 py-4">
             <div className="mb-5 flex items-center justify-between">
               <span className="text-[24px] font-bold">Your guides</span>
               <button className="flex items-center rounded-full bg-[#E9ECEF] px-6 py-2 text-[14px] font-semibold">
@@ -178,7 +216,11 @@ function HomePage() {
             </div>
             <div>
               You don’t have any trip plans yet.{" "}
-              <span className="font-bold text-[#F75940]"> Create a new guide</span>.
+              <span className="font-bold text-[#F75940]">
+                {" "}
+                Create a new guide
+              </span>
+              .
             </div>
           </div>
         </div>
