@@ -15,7 +15,7 @@ import { ModalContext } from "@Context/ModalProvider";
 import dayjs from "dayjs";
 
 function Places({ place, url }) {
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const {
     startDate,
     endDate,
@@ -54,7 +54,6 @@ function Places({ place, url }) {
     file.preview = URL.createObjectURL(file);
     setImage(file);
   };
-
 
   const togglePopup = () => {
     const popup = document.getElementById(`${place}-id`);
@@ -98,7 +97,7 @@ function Places({ place, url }) {
     setPrice(tempPrice);
     setTotalPrice(Number(tempPrice));
 
-    setInitialPrice(tempPrice);
+    setInitialPrice(Number(tempPrice));
     togglePopup();
   };
   useEffect(() =>{

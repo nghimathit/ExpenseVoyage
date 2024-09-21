@@ -10,9 +10,14 @@ const ModalProvider = ({ children }) => {
   const [endDate, setEndDate] = useState();
   const [countries, setCountries] = useState();
   const [typeCurreny, setTypeCurreny] = useState("$");
+<<<<<<< HEAD
   const [onPriceChange, setonPriceChange] = useState();
   const [initialPrice, setInitialPrice] = useState("");
   
+=======
+  const [onPriceChange, setonPriceChange] = useState(0);
+  const [initialPrice, setInitialPrice] = useState(0);
+>>>>>>> 2b0501a93fd457e5234e7d0f20e531e8781e191c
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     if (onPriceChange && !isNaN(onPriceChange)) {
