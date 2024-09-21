@@ -18,6 +18,7 @@ const Register = () => {
     let valid = true;
     const newErrors = { email: '' };
     const validateForm = () => {
+
         // Email validation
         if (!formData.email) {
             newErrors.email = 'Email is required';
