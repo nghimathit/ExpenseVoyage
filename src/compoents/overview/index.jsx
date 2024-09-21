@@ -67,6 +67,7 @@ function Overview() {
     totalPrice,
     setTotalPrice,
     typeCurreny,
+    
   } = useContext(ModalContext);
   const [places, setPlaces] = useState([]);
   const [placesByDate, setPlacesByDate] = useState({});
@@ -346,10 +347,12 @@ function Overview() {
                 Budgeting
               </span>
               <div className="mb-4 text-[36px] text-[#6C757D]">
-                {currency(totalPrice, {
+              {/* định dạng tiền */}
+                {/* {currency(totalPrice, {
                   symbol: typeCurreny,
                   precision: 2,
-                }).format()}
+                }).format()} */}
+                {totalPrice}
               </div>
             </div>
           </div>
