@@ -19,7 +19,11 @@ const Hearder = () => {
     
   } = useContext(ModalContext);
   const [checkPathLogin, setcheckPathLogin] = useState(true);
+  //const [userInfo, setUserInfo] = useState({});
   const location = useLocation();
+  
+  const userInfo = JSON.parse(localStorage.getItem('user'));
+  console.log('userInfo', userInfo);
   useEffect(() => {
     if (location.pathname === "/login" || location.pathname === "/register") {
       setcheckPathLogin(false);
@@ -100,17 +104,17 @@ const Hearder = () => {
             >
               <button>Register</button>
             </div>
-            {/* <div className="avatar-username">
+            <div className="avatar-username">
             <div className="circle">
               <div className="avatar">
                 <img
-                  src="https://zpsocial2-f7-org.zadn.vn/677ef46d4c81acdff590.jpg"
+                  src={userInfo.avatar?userInfo.avatar:'https://zpsocial2-f7-org.zadn.vn/677ef46d4c81acdff590.jpg'}
                   alt=""
                 />
               </div>
             </div>
-            <div className="username">Van Nghi</div>
-          </div> */}
+            <div className="username">{userInfo?userInfo.name:'Hello'}</div>
+          </div>
           </div>
         </div>
       </header>
