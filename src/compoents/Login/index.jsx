@@ -2,7 +2,8 @@ import Loaing from '@compoents/Loaing';
 import React, { useState } from 'react';
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-
+import { GoogleOAuthProvider } from '@react-oauth/google';
+const clientId ='902729761307-c9kib0ukl904i7la1s81hh1201e4ch6t.apps.googleusercontent.com';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -206,11 +207,13 @@ const Login = () => {
                                 {/* Social login buttons go here */}
                                 <a href="#" className="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-gray-800 rounded-md group hover:bg-gray-800 focus:outline-none">
                                     {/* Github Icon */}
+                                      <GoogleOAuthProvider clientId={clientId}> 
                                     <span className="text-gray-800">
                                         <GoogleLogin
                                             onSuccess={handleLoginSuccess}
                                             onError={handleLoginFailure}
-                                        /></span>
+                                        /></span> 
+                                             </GoogleOAuthProvider> 
                                 </a>
                                 <a href="#" className="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-blue-500 rounded-md group hover:bg-blue-500 focus:outline-none">
                                     {/* Twitter Icon */}

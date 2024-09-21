@@ -10,15 +10,18 @@ const ModalProvider = ({ children }) => {
   const [endDate, setEndDate] = useState();
   const [countries, setCountries] = useState();
   const [typeCurreny, setTypeCurreny] = useState("$");
-  const [originalMoney] = useState(500000);
   const [onPriceChange, setonPriceChange] = useState();
   const [initialPrice, setInitialPrice] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
-    if (onPriceChange) {
-      setTotalPrice((prevTotal) => prevTotal + onPriceChange);
+    if (onPriceChange && !isNaN(onPriceChange)) {
+        setTotalPrice((prevTotal) => prevTotal + Number(onPriceChange));
     }
-  }, [onPriceChange]);
+}, [onPriceChange]);
+  useEffect(() =>{
+    console.log("onPriceChange", onPriceChange)
+    console.log("totalPrice", totalPrice)
+  }, [onPriceChange, totalPrice]);  
   //   không cho cuộn trang web
   useEffect(() => {
     if (isShow) {
@@ -40,7 +43,6 @@ const ModalProvider = ({ children }) => {
         setCountries,
         typeCurreny,
         setTypeCurreny,
-        originalMoney,
         onPriceChange,
         setInitialPrice,
         totalPrice,

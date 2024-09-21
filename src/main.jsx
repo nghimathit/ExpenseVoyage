@@ -11,6 +11,7 @@ import PlanStrip from '@compoents/PlanTrip'
 import Overview from '@compoents/overview'
 import Login from '@compoents/Login';
 import Register from '@compoents/Register'
+import Viewbyid from '@compoents/overview/viewbyid'
 
 import Dashboard from '@compoents/Admin/Doashboard'
 import UserList from '@compoents/Admin/UserList'
@@ -19,7 +20,8 @@ import AddTour from '@compoents/Admin/AddTour'
 import Edit from '@compoents/Admin/TourList/Edit'
 import TripList from '@compoents/Admin/TripList'
 
-import { GoogleOAuthProvider } from '@react-oauth/google';
+// import { GoogleOAuthProvider } from '@react-oauth/google';
+import ForgotPassword from '@compoents/Login/ForgotPassword'
 
 
 
@@ -53,6 +55,14 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />
+      },
+      {
+        path: "/forgotpassword",
+        element: <ForgotPassword/>
+      },
+      {
+        path: "/overview/:tripid",
+        element: <Viewbyid />
       },
 
     ]
@@ -90,9 +100,9 @@ const router = createBrowserRouter([
 const clientId ='902729761307-c9kib0ukl904i7la1s81hh1201e4ch6t.apps.googleusercontent.com';
 createRoot(document.getElementById('root')).render(
   <ModalProvider >
-    <GoogleOAuthProvider clientId={clientId}>
+    {/* <GoogleOAuthProvider clientId={clientId}> */}
       <RouterProvider router={router} />
-      </GoogleOAuthProvider>
+      {/* </GoogleOAuthProvider> */}
   </ModalProvider>
 
 

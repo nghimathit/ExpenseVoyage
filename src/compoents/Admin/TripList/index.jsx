@@ -71,7 +71,7 @@ function TripList() {
                             <td>{new Date(trip.startDate).toLocaleDateString()}</td>
                             <td>{new Date(trip.endDate).toLocaleDateString()}</td>
                             <td>
-                                <button onClick={() => onViewDetails(trip)}>View Details</button>
+                                <button className='buttonl' onClick={() => onViewDetails(trip)}>View Details</button>
                             </td>
                         </tr>
                     ))}

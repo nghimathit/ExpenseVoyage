@@ -30,20 +30,20 @@ const Hearder = () => {
   // đổi tiền tệ
   const handleCurrencyChange = () => {
     const selectedCurrency = document.getElementById("currency").value;
-    if (selectedCurrency === "USD") {
-      const usd = initialPrice / 24615;
-      setTypeCurreny("$");
+    if (selectedCurrency === "VND") {
+      const usd = initialPrice * 24615;
+      setTypeCurreny("đ");
       setTotalPrice(usd);
     } else if (selectedCurrency === "EURO") {
-      const euro = initialPrice / 27386;
+      const euro = initialPrice * 0.96;
       setTypeCurreny("€");
       setTotalPrice(euro);
     } else if (selectedCurrency === "GBP") {
-      const euro = initialPrice / 32740;
+      const euro = initialPrice * 0.75;
       setTypeCurreny("€");
       setTotalPrice(euro);
     } else {
-      setTypeCurreny("đ");
+      setTypeCurreny("$");
       setTotalPrice(initialPrice);
     }
     console.log(selectedCurrency)
@@ -76,17 +76,19 @@ const Hearder = () => {
                 <option value="GBP">GBP</option>
               </select>
             </div>
+            <Link to={'/login'}>
             <div
               className="login"
-              onClick={() => {
-                if (checkPathLogin) {
-                  setisShow(true);
-                  setContent(<Login />);
-                }
-              }}
+              // onClick={() => {
+              //   if (checkPathLogin) {
+              //     setisShow(true);
+              //     setContent(<Login />);
+              //   }
+              // }}
             >
               <button className="w-full">Login</button>
             </div>
+            </Link>
             <div
               className="register"
               onClick={() => {
