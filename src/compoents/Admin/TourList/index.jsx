@@ -52,7 +52,7 @@ function TourList() {
         <thead>
           <tr>
             <th>Tour Name</th>
-            <th>Description</th>
+            <th>Image</th>
             <th>Price (VND)</th>
             <th>City Name</th>
             <th>Action</th>

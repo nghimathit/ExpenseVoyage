@@ -10,10 +10,11 @@ function AddTour() {
   const [status, setStatus] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [imageTour, setImageTour] = useState('');
+  const [imageTour, setImageTour] = useState("");
   const [cities, setCities] = useState([]);
   const [selectedCityId, setSelectedCityId] = useState('');
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchCities = async () => {
       try {
@@ -23,29 +24,41 @@ function AddTour() {
         console.error('There was an error fetching cities!', error);
       }
     };
-
     fetchCities();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (tourName && description && price && status && startDate && endDate && selectedCityId) {
-      const newTour = {
-        tourName,
-        description,
-        price: parseFloat(price),
-        status,
-        startDate,
-        endDate,
-        imageTour,
-        cityId: selectedCityId,
-      };
+      const formData = new FormData();
+      formData.append('tourName', tourName);
+      formData.append('description', description);
+      formData.append('price', parseFloat(price));
+      formData.append('status', status);
+      formData.append('startDate', startDate);
+      formData.append('endDate', endDate);
+      formData.append('cityId', selectedCityId);
+
+      // Check if image is uploaded
+      if (imageTour) {
+        console.log('Uploading Image:', imageTour);
+        formData.append('imageTour', imageTour); 
+      } else {
+        console.log('No image uploaded');
+      }
 
       try {
-        const response = await axios.post('http://localhost:5096/api/Tour', newTour);
+        const response = await axios.post('http://localhost:5096/api/Tour', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        
+     console.log("nghi",formData);
         console.log('Tour added successfully:', response.data);
-        alert('Tour added successfully!'); // Hiển thị thông báo
-        navigate('/admin/tours/all');
+        alert('Tour added successfully!');
+
         // Reset form fields
         setTourName('');
         setDescription('');
@@ -53,19 +66,24 @@ function AddTour() {
         setStatus('');
         setStartDate('');
         setEndDate('');
-        setImageTour('');
-        setSelectedCityId(''); // Reset city selection
+        setImageTour(null);
+        setSelectedCityId('');
+        navigate('/admin/tours/all');
       } catch (error) {
         console.error('There was an error adding the tour!', error);
       }
     } else {
-      alert("Please fill in all fields.");
+      alert('Please fill in all fields.');
     }
+  };
+
+  const handleFileChange = (e) => {
+    setImageTour(e.target.files[0].name);
   };
 
   return (
     <div className="add-tour">
-      <h2 className='h2'>Add New Tour</h2>
+      <h2 className="h2">Add New Tour</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="tourName">Tour Name</label>
@@ -77,7 +95,7 @@ function AddTour() {
             required
           />
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="price">Price (VND)</label>
           <input
@@ -132,6 +150,14 @@ function AddTour() {
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Upload New Image (optional)</label>
+          <input
+            type="file"
+            onChange={handleFileChange}
           />
         </div>
 

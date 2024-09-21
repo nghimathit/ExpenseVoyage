@@ -58,7 +58,7 @@ const router = createBrowserRouter([
     ]
   },
   {
-    element: <RootLayoutAdmin />, // cấu hình các component Admin
+    element: <RootLayoutAdmin />,
     children: [
       {
         path: "/admin",
