@@ -1,11 +1,22 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Space } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import mixvivu from "../../../image/Mixivivuduthuyen.gif";
 import axios from "axios";
 import "./tour.scss";
+import currency from "currency.js";
+import { ModalContext } from "@Context/ModalProvider";
+import { Link } from "react-router-dom";
 function TourView() {
+  const {
+    startDate,
+    endDate,
+    setonPriceChange,
+    setTotalPrice,
+    typeCurreny,
+    setInitialPrice,
+  } = useContext(ModalContext);
   const [image, setImage] = useState(mixvivu);
   useEffect(() => {
     return () => {
@@ -18,15 +29,16 @@ function TourView() {
     setImage(file);
   };
   const [tour, setTour] = useState([]);
+
   useEffect(() => {
     axios
       .get("http://localhost:5096/api/Tour")
       .then((result) => {
-        console.log(result.data.data)
-        setTour(result.data.data)
+        console.log(result.data.data);
+        setTour(result.data.data);
       })
       .catch((error) => console.log(error));
-  });
+  }, []);
   return (
     <div className="h-full w-full pl-52">
       <div className="relative mb-5 w-full bg-transparent">
@@ -45,11 +57,12 @@ function TourView() {
           <input type="file" id="image" hidden onChange={handleImage} />
         </div>
       </div>
-      <div className="grid h-screen w-full grid-cols-4 gap-2">
-        {tour.map((item,index) => (
-            <div className="col-span-1" key={index}>
-            <div className=" w-full rounded-2xl bg-[#fff] shadow-xl">
-              <div className="h-52 w-full rounded-tl-2xl rounded-tr-2xl bg-black">
+      <div className="grid w-full grid-cols-4 gap-2 my-2 mb-4">
+        {tour.map((item, index) => (
+        <Link to={`/tour/${item.id}`} key={index}>
+          <div className="col-span-1">
+            <div className="w-full cursor-pointer rounded-2xl bg-[#fff] shadow-xl">
+              <div className="h-52 w-full rounded-tl-2xl rounded-tr-2xl">
                 <img
                   className="h-full w-full rounded-tl-2xl rounded-tr-2xl object-cover"
                   src={item.imageTour}
@@ -59,11 +72,18 @@ function TourView() {
               <div className="w-full p-3">
                 <span className="text-[20px] font-light">{item.tourName}</span>
                 <div className="three-lines text-[14px] text-[#6c757d]">
-                {item.description}
+                  {item.description}
                 </div>
+                <span className="text-[red]">
+                  {currency(item.price, {
+                    symbol: typeCurreny,
+                    precision: 2,
+                  }).format()}
+                </span>
               </div>
             </div>
           </div>
+          </Link>
         ))}
       </div>
     </div>

@@ -21,6 +21,7 @@ import Edit from '@compoents/Admin/TourList/Edit'
 import TripList from '@compoents/Admin/TripList'
 import ForgotPassword from '@compoents/Login/ForgotPassword'
 import TourView from '@compoents/overview/tour'
+import Tourbyid from '@compoents/overview/tour/tourbyid'
 
 
 
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/tour",
         element: <TourView />
+      },
+      {
+        path: "/tour/:id",
+        element: <Tourbyid />
       },
       {
         path: "/overview/:tripid",

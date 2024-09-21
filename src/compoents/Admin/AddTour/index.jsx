@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AddTour.scss';
 import { useNavigate } from 'react-router-dom';
-
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 function AddTour() {
   const [tourName, setTourName] = useState('');
   const [description, setDescription] = useState('');
@@ -55,6 +56,7 @@ function AddTour() {
       console.error('Error adding tour:', error);
     }
   };
+  
   // const handleCountry = (e) =>{
   //   axios.get('http://localhost:5096/api/city')
   //   .then(result => {
@@ -100,11 +102,14 @@ function AddTour() {
 
         <div className="form-group">
           <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
+          {/* Thay textarea bằng CKEditor */}
+          <CKEditor
+            editor={ClassicEditor}
+            data={description}
+            onChange={(event, editor) => {
+              const data = editor.getData();
+              setDescription(data);
+            }}
           />
         </div>
 
