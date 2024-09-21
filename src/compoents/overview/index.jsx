@@ -58,14 +58,26 @@ function Overview() {
   const [showPopup, setShowPopup] = useState(false);
   const [top100Films, settop100Films] = useState([]);
   const [destination, setDestination] = useState([]);
-  const { setStartDate, setEndDate, startDate, endDate, countries, totalPrice, typeCurreny } =
-    useContext(ModalContext);
+  const {
+    setStartDate,
+    setEndDate,
+    startDate,
+    endDate,
+    countries,
+    totalPrice,
+    setTotalPrice,
+    typeCurreny,
+  } = useContext(ModalContext);
   const [places, setPlaces] = useState([]);
   const [placesByDate, setPlacesByDate] = useState({});
   const [url, setUrl] = useState();
+  const handlePlaceChange = (price) => {
+    setTotalPrice((prevTotal) => prevTotal + price); 
+  };
 
   const addPlace = (newPlace) => {
     setPlaces([...places, newPlace]);
+    handlePlaceChange(newPlace.price);
   };
 
   const removePlace = (index) => {
@@ -80,7 +92,7 @@ function Overview() {
       };
     });
   };
-  
+
   const removePlaceday = (date, index) => {
     setPlacesByDate((prev) => {
       const placesForDate = prev[date] || [];
@@ -333,7 +345,12 @@ function Overview() {
               <span className="w-full text-[18px] font-extrabold">
                 Budgeting
               </span>
-              <div className="mb-4 text-[36px] text-[#6C757D]">{currency(totalPrice, { symbol: typeCurreny, precision: 2 }).format()}</div>
+              <div className="mb-4 text-[36px] text-[#6C757D]">
+                {currency(totalPrice, {
+                  symbol: typeCurreny,
+                  precision: 2,
+                }).format()}
+              </div>
             </div>
           </div>
         </div>
@@ -378,12 +395,13 @@ function Overview() {
               className="w-full bg-transparent"
               disablePortal
               options={country}
+              typeof="text"
               getOptionLabel={(option) => option.name}
               onChange={(event, newValue) => {
                 if (newValue) addPlace(newValue);
               }}
               renderInput={(params) => (
-                <TextField {...params} label="Add a place" />
+                <TextField {...params} label="Add a place" type="text" />
               )}
             />
           </div>
@@ -395,48 +413,49 @@ function Overview() {
         <span className="text-[36px] font-extrabold">Itinerary</span>
       </div>
       <div className="list-none">
-      {startDate && endDate &&
-  calculateDaysBetween(startDate, endDate).map((date, index) => (
-    <li key={index} className="my-2">
-      <div className="text-[22px] font-black">
-        <FontAwesomeIcon
-          icon={faChevronDown}
-          className="mr-3 text-[14px]"
-        />
-        {formatDayMonth(date)}
-      </div>
-      {placesByDate[date]?.map((place, placeIndex) => (
-        <div
-          key={placeIndex}
-          className="mb-4 flex items-center justify-between rounded-xl bg-[#f3f4f5] p-2"
-        >
-          <Places place={place?.name} url={place?.url} />
-          <button
-            onClick={() => removePlaceday(date, placeIndex)}
-            className="ml-2"
-          >
-            <FontAwesomeIcon icon={faTrash} />
-          </button>
-        </div>
-      ))}
-      <div className="w-full">
-        <div className="mb-4 flex w-full items-center justify-center rounded-xl bg-[#f3f4f5] p-2">
-          <Autocomplete
-            className="w-full bg-transparent"
-            disablePortal
-            options={country}
-            getOptionLabel={(option) => option.name}
-            onChange={(event, newValue) => {
-              if (newValue) addPlaceday(date, newValue);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} label="Add a place" />
-            )}
-          />
-        </div>
-      </div>
-    </li>
-  ))}
+        {startDate &&
+          endDate &&
+          calculateDaysBetween(startDate, endDate).map((date, index) => (
+            <li key={index} className="my-2">
+              <div className="text-[22px] font-black">
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  className="mr-3 text-[14px]"
+                />
+                {formatDayMonth(date)}
+              </div>
+              {placesByDate[date]?.map((place, placeIndex) => (
+                <div
+                  key={placeIndex}
+                  className="mb-4 flex items-center justify-between rounded-xl bg-[#f3f4f5] p-2"
+                >
+                  <Places place={place?.name} url={place?.url} />
+                  <button
+                    onClick={() => removePlaceday(date, placeIndex)}
+                    className="ml-2"
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </div>
+              ))}
+              <div className="w-full">
+                <div className="mb-4 flex w-full items-center justify-center rounded-xl bg-[#f3f4f5] p-2">
+                  <Autocomplete
+                    className="w-full bg-transparent"
+                    disablePortal
+                    options={country}
+                    getOptionLabel={(option) => option.name}
+                    onChange={(event, newValue) => {
+                      if (newValue) addPlaceday(date, newValue);
+                    }}
+                    renderInput={(params) => (
+                      <TextField {...params} label="Add a place" />
+                    )}
+                  />
+                </div>
+              </div>
+            </li>
+          ))}
       </div>
     </div>
   );

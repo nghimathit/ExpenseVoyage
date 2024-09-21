@@ -14,10 +14,14 @@ const ModalProvider = ({ children }) => {
   const [initialPrice, setInitialPrice] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
-    if (onPriceChange) {
-      setTotalPrice((prevTotal) => prevTotal + onPriceChange);
+    if (onPriceChange && !isNaN(onPriceChange)) {
+        setTotalPrice((prevTotal) => prevTotal + Number(onPriceChange));
     }
-  }, [onPriceChange]);
+}, [onPriceChange]);
+  useEffect(() =>{
+    console.log("onPriceChange", onPriceChange)
+    console.log("totalPrice", totalPrice)
+  }, [onPriceChange, totalPrice]);  
   //   không cho cuộn trang web
   useEffect(() => {
     if (isShow) {

@@ -8,11 +8,11 @@ function Edit() {
   const [tour, setTour] = useState({
     tourName: '',
     description: '',
+    status: '',
     startDate: '',
     endDate: '',
     price: '',
-    imageTour: '',
-    cityId: '', 
+    cityId: '',
   });
   const [image, setImage] = useState(null); 
   const navigate = useNavigate();
@@ -41,11 +41,11 @@ function Edit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('tour', JSON.stringify({
-      id: id,
-      ...tour,
-      cityId: tour.cityId, 
-    }));
+    
+    // Append tour data to FormData
+    Object.keys(tour).forEach((key) => {
+      formData.append(key, tour[key]);
+    });
 
     if (image) {
       formData.append('formFile', image);
@@ -58,7 +58,7 @@ function Edit() {
         },
       });
       alert("Tour updated successfully!");
-      navigate('/admin/tours'); 
+      navigate('/admin/tours/all'); 
     } catch (error) {
       console.error("Error updating tour", error);
       alert("Error updating tour. Please try again.");
@@ -71,12 +71,7 @@ function Edit() {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>ID</label>
-          <input
-            type="text"
-            name="id"
-            value={id}
-            readOnly
-          />
+          <input type="text" name="id" value={id} readOnly />
         </div>
         <div className="form-group">
           <label>Tour Name</label>
@@ -96,6 +91,20 @@ function Edit() {
             onChange={handleChange}
             required
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="status">Status</label>
+          <select
+            id="status"
+            name="status"
+            value={tour.status}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Status</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
         </div>
         <div className="form-group">
           <label>Start Date</label>
@@ -154,10 +163,7 @@ function Edit() {
         {/* Upload New Image */}
         <div className="form-group">
           <label>Upload New Image (optional)</label>
-          <input
-            type="file"
-            onChange={handleFileChange}
-          />
+          <input type="file" onChange={handleFileChange} />
         </div>
 
         <button type="submit">Update Tour</button>

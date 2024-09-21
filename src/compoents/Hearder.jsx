@@ -76,17 +76,19 @@ const Hearder = () => {
                 <option value="GBP">GBP</option>
               </select>
             </div>
+            <Link to={'/login'}>
             <div
               className="login"
-              onClick={() => {
-                if (checkPathLogin) {
-                  setisShow(true);
-                  setContent(<Login />);
-                }
-              }}
+              // onClick={() => {
+              //   if (checkPathLogin) {
+              //     setisShow(true);
+              //     setContent(<Login />);
+              //   }
+              // }}
             >
               <button className="w-full">Login</button>
             </div>
+            </Link>
             <div
               className="register"
               onClick={() => {
