@@ -61,11 +61,7 @@ function TripList() {
                             <td>{trip.destination}</td>
                             <td>
                                 {/* Display only the first image */}
-                                {trip.images && trip.images.length > 0 ? (
-                                    <img src={trip.images[0].image} width="100px" alt={`Trip Image`} />
-                                ) : (
-                                    <p>No image</p>
-                                )}
+                                <img src={trip.url} width="100" alt={`Trip Image`} />
                             </td>
                             <td>{trip.budget}</td>
                             <td>{new Date(trip.startDate).toLocaleDateString()}</td>

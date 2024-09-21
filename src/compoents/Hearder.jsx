@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import "./header/headers.scss";
 import logo from "../image/logo.jpeg";
 import { ModalContext } from "@Context/ModalProvider";
 import Login from "./Login";
 import Register from "./Register";
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 const Hearder = () => {
   const {
     setisShow,
@@ -23,6 +24,22 @@ const Hearder = () => {
   const location = useLocation();
   
   const userInfo = JSON.parse(localStorage.getItem('user'));
+  const [userid, setUserid] = useState(() => {
+    const storedData = localStorage.getItem('user');
+    return storedData ? JSON.parse(storedData) : null;
+  });
+  const [user, setUser] = useState({}); 
+
+  useEffect(() => {
+    if (userid && userid.Id) {
+      axios.get(`http://localhost:5096/api/User/${userid.Id}`)
+        .then(result => {
+          setUser(result.data.data);
+         
+        })
+        .catch(err => console.error(err));
+    }
+  }, [userid]);
   console.log('userInfo', userInfo);
   useEffect(() => {
     if (location.pathname === "/login" || location.pathname === "/register") {
@@ -80,20 +97,34 @@ const Hearder = () => {
                 <option value="GBP">GBP</option>
               </select>
             </div>
-            <Link to={'/login'}>
-            <div
-              className="login"
-              // onClick={() => {
-              //   if (checkPathLogin) {
-              //     setisShow(true);
-              //     setContent(<Login />);
-              //   }
-              // }}
-            >
-              <button className="w-full">Login</button>
+            {userInfo ? (
+              <div className="avatar-username">
+              <div className="circle">
+                <div className="avatar">
+                  <img
+                    src='https://zpsocial2-f7-org.zadn.vn/677ef46d4c81acdff590.jpg'
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div className="username">{user?user.name:'Hello'}</div>
             </div>
-            </Link>
-            <div
+            ) : (
+              <Link to={'/login'}>
+              <div
+                className="login"
+                // onClick={() => {
+                //   if (checkPathLogin) {
+                //     setisShow(true);
+                //     setContent(<Login />);
+                //   }
+                // }}
+              >
+                <button className="w-full">Login</button>
+              </div>
+              </Link>
+            )}
+           {userInfo ? <Fragment /> :  <div
               className="register"
               onClick={() => {
                 if (checkPathLogin) {
@@ -103,18 +134,8 @@ const Hearder = () => {
               }}
             >
               <button>Register</button>
-            </div>
-            <div className="avatar-username">
-            <div className="circle">
-              <div className="avatar">
-                <img
-                  src={userInfo.avatar?userInfo.avatar:'https://zpsocial2-f7-org.zadn.vn/677ef46d4c81acdff590.jpg'}
-                  alt=""
-                />
-              </div>
-            </div>
-            <div className="username">{userInfo?userInfo.name:'Hello'}</div>
-          </div>
+            </div>}
+            
           </div>
         </div>
       </header>

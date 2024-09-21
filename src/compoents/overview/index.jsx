@@ -58,6 +58,13 @@ function Overview() {
   const [showPopup, setShowPopup] = useState(false);
   const [top100Films, settop100Films] = useState([]);
   const [destination, setDestination] = useState([]);
+  const [tour,setTour] = useState([]);
+  useEffect(()=>{
+    axios.get('http://localhost:5096/api/Tour')
+    .then(response => setTour(response.data.data))
+    .catch(error => console.log(error));
+  }, [])
+  console.log(tour);
   const {
     setStartDate,
     setEndDate,
@@ -273,7 +280,7 @@ function Overview() {
         </div>
         <div className="swiper mb-4 w-full" ref={swiperRef}>
           <div className="swiper-wrapper">
-            {fakedata.map((item, index) => {
+            {tour.map((tours, index) => {
               return (
                 <div
                   className="swiper-slide w-44 rounded-xl bg-gray-50 shadow-md"
@@ -281,25 +288,18 @@ function Overview() {
                 >
                   <div className="h-28 w-full overflow-hidden">
                     <img
-                      src="https://plus.unsplash.com/premium_photo-1690960644830-487c569ca6fa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGhvJTIwY2hpJTIwbWluaHxlbnwwfHwwfHx8MA%3D%3D"
+                      src={tours.imageTour}
                       className="scale-image h-full w-full rounded-lg object-cover"
                       alt="ho chi minh"
                     />
                   </div>
                   <div className="p-2">
                     <span className="two-lines mb-2 text-[18px]">
-                      Top places for Vietnam
+                    {tours.description}
                     </span>
                     <div className="flex gap-2">
-                      <div className="mb-2 h-6 w-6">
-                        <img
-                          src="https://zpsocial2-f14-org.zadn.vn/3f7dafff5d1abd44e40b.jpg"
-                          alt=""
-                          className="rounded-full"
-                        />
-                      </div>
                       <span className="text-[12px] text-[#6c757d]">
-                        Cho in yeong
+                        {tours.tourName}
                       </span>
                     </div>
                   </div>

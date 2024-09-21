@@ -12,6 +12,7 @@ const ModalProvider = ({ children }) => {
   const [typeCurreny, setTypeCurreny] = useState("$");
   const [onPriceChange, setonPriceChange] = useState();
   const [initialPrice, setInitialPrice] = useState("");
+  
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     if (onPriceChange && !isNaN(onPriceChange)) {

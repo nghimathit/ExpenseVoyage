@@ -55,11 +55,7 @@ function Places({ place, url }) {
     setImage(file);
   };
 
-  useEffect(() => {
-    if (onPriceChange) {
-      setTotalPrice(Number(onPriceChange)); 
-    }
-  }, [onPriceChange]);
+
   const togglePopup = () => {
     const popup = document.getElementById(`${place}-id`);
     if (popup) {
@@ -100,7 +96,7 @@ function Places({ place, url }) {
   };
   const handleSave = () => {
     setPrice(tempPrice);
-    setonPriceChange(Number(tempPrice));
+    setTotalPrice(Number(tempPrice));
 
     setInitialPrice(tempPrice);
     togglePopup();
