@@ -136,7 +136,7 @@ const RegisterUser = ({ email }) => {
                                 value={formData.name}
                                 onChange={handleChange}
                                 className={`px-4 py-2 transition duration-300 border rounded focus:border-transparent focus:outline-none focus:ring-4 ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
-                                required
+                                
                             />
                             {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                         </div>
@@ -149,7 +149,7 @@ const RegisterUser = ({ email }) => {
                                 value={formData.password}
                                 onChange={handleChange}
                                 className={`px-4 py-2 transition duration-300 border rounded focus:border-transparent focus:outline-none focus:ring-4 ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
-                                required
+                                
                             />
                             {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
                         </div>
@@ -162,7 +162,6 @@ const RegisterUser = ({ email }) => {
                                 value={formData.confirmPassword}
                                 onChange={handleChange}
                                 className={`px-4 py-2 transition duration-300 border rounded focus:border-transparent focus:outline-none focus:ring-4 ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'}`}
-                                required
                             />
                             {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
                         </div>
