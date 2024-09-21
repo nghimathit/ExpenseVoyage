@@ -80,6 +80,8 @@ const Hearder = () => {
                 <option value="GBP">GBP</option>
               </select>
             </div>
+            {!userInfo &&
+            <div className="flex gap-2">
             <Link to={'/login'}>
             <div
               className="login"
@@ -104,6 +106,9 @@ const Hearder = () => {
             >
               <button>Register</button>
             </div>
+            </div>
+            }
+            {userInfo  &&
             <div className="avatar-username">
             <div className="circle">
               <div className="avatar">
@@ -113,8 +118,11 @@ const Hearder = () => {
                 />
               </div>
             </div>
-            <div className="username">{userInfo?userInfo.name:'Hello'}</div>
-          </div>
+            <div className="username">{userInfo.name?userInfo.name:'Hello'}</div>
+            </div>
+            }
+            
+
           </div>
         </div>
       </header>

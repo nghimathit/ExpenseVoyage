@@ -33,7 +33,7 @@ const Login = () => {
             console.log('Login successful!', data);
             localStorage.setItem('user', JSON.stringify(data.data))
             console.log("DataLogin", data.data)
-            // location.href="/";
+            location.href="/";
         } catch (error) {
             setError(error.message);
         } finally {
