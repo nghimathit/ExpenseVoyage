@@ -1,15 +1,21 @@
-import Footer from "@compoents/Footer";
+
 import HearderAdmin from "@compoents/HearderAdmin";
+import SidebarAdmin from "@compoents/SidebarAdmin ";
 import React from "react";
-import { Outlet, useLocation } from "react-router-dom"; 
+import { Outlet,  } from "react-router-dom"; 
+import "../compoents/rootlayout/rootlayoutadmin.scss";
 const RootLayoutAdmin = () => {
 
   return (
     <div>
     <div className="container m-0 p-0">
       <HearderAdmin /> {/* Các component chung */}
+      
+      <SidebarAdmin />
+
+     
     </div>
-    <div className="container">
+    <div className="display">
       <Outlet /> {/* Các component ở giữa */}
     </div>
     

@@ -1,0 +1,142 @@
+.tour-list {
+    margin: 20px auto;
+    max-width: 90%;
+    font-family: 'Arial', sans-serif;
+}
+.h1{
+    font-size: xx-large;
+    font-weight: bold;
+}
+.tour-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tour-list th,
+.tour-list td {
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   
+  }
+.tour-list th {
+    background-color: #0A2558;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.tour-list tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.tour-list tr:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+.tour-list td {
+    font-size: 16px;
+    color: #333;
+}
+
+.tour-list button {
+    padding: 8px 14px;
+    margin: 0 5px;
+    background-color: #0A2558;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 5px;
+}
+
+.tour-list button:hover {
+    background-color: #004080;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tour-list table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .tour-list th,
+    .tour-list td {
+        font-size: 12px;
+    }
+}
+/* TourList.scss */
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Mờ nền */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Đảm bảo modal nằm trên cùng */
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 600px; /* Điều chỉnh kích thước tối đa của modal */
+    width: 100%;
+  }
+  .modal-details {
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+  }
+  
+  .modal-info {
+    flex: 2; /* Make the info section take more space */
+    margin-right: 20px;
+  }
+  
+  .modal-info p {
+    margin-bottom: 10px;
+    line-height: 1.6; /* Increase line spacing for readability */
+  }
+  
+  .modal-info .description {
+    font-size: 16px; /* Adjust font size */
+    max-width: 100%; /* Ensure it uses full width */
+    word-wrap: break-word; /* Ensure long words wrap correctly */
+    white-space: pre-wrap; /* Ensure newlines in description are kept */
+  }
+  
+  .modal-image {
+    flex: 1; /* Set the image section to take less space */
+    max-width: 150px;
+  }
+  
+  .modal-image img {
+    max-width: 100%;
+    border-radius: 5px;
+  }
+  
+  

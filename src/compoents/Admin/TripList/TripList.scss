@@ -1,0 +1,193 @@
+.user-list {
+  margin: 20px auto;
+  max-width: 90%;
+  font-family: 'Arial', sans-serif;
+}
+
+.h1 {
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.user-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-list th, .user-list td {
+  padding: 12px 20px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-list td img {
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+.user-list th {
+  background-color: #0A2558;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.user-list tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.user-list tr:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.user-list td {
+  font-size: 16px;
+  color: #333;
+}
+
+.user-list button {
+  padding: 8px 14px;
+  background-color: #0A2558;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #004080;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(10, 37, 88, 0.5);
+  }
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .user-list table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .user-list th, .user-list td {
+    font-size: 12px;
+  }
+}
+
+
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%; /* Adjust for responsiveness */
+  max-width: 1200px; /* Set a max width */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+.modal-header {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #0A2558;
+}
+
+.modal-details {
+  display: flex;
+  flex-direction: row; /* Align details and image horizontally */
+  justify-content: space-between; /* Space between details and image */
+  gap: 20px; /* Space between columns */
+}
+
+.details-info {
+  flex: 0.5; /* Take up more space than the image */
+}
+
+.details-image {
+  flex: 1; /* Take up less space */
+  text-align: right; /* Align the image to the right */
+
+}
+
+.details-username {
+  margin-top: 65px;
+  font-size: 16px;
+  color: #555;
+}
+
+.details-image img {
+  max-width: 200px;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.trip-day-table {
+  margin-top: 20px;
+}
+
+.trip-day-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.trip-day-table th, .trip-day-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+.trip-day-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.trip-day-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.trip-day-table tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

@@ -11,7 +11,13 @@ import PlanStrip from '@compoents/PlanTrip'
 import Overview from '@compoents/overview'
 import Login from '@compoents/Login';
 import Register from '@compoents/Register'
-import Test from '@compoents/test'
+
+import Dashboard from '@compoents/Admin/Doashboard'
+import UserList from '@compoents/Admin/UserList'
+import TourList from '@compoents/Admin/TourList'
+import AddTour from '@compoents/Admin/AddTour'
+import Edit from '@compoents/Admin/TourList/Edit'
+import TripList from '@compoents/Admin/TripList'
 
 
 
@@ -53,7 +59,27 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/admin",
-        element: <Test/>
+        element: <Dashboard/>
+      },
+      {
+        path: "/admin/users",
+        element: <UserList/>
+      },
+      {
+        path: "/admin/tours/all",
+        element: <TourList/>
+      },
+      {
+        path: "/admin/tours/add",
+        element: <AddTour/>
+      },
+      {
+        path: "/admin/tours/edit/:id",
+        element: <Edit/>
+      },
+      {
+        path: "/admin/trip",
+        element: <TripList/>
       },
     ]
   },

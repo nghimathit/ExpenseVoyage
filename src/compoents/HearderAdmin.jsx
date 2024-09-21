@@ -5,7 +5,6 @@ const HearderAdmin = () => {
     <div className="home-section">
     <nav>
            <div className="sidebar-button" >
-               <i className='bx bx-menu' ></i>
                
            </div>
            <div className="profile-details">
