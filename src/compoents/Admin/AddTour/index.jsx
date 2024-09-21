@@ -10,11 +10,10 @@ function AddTour() {
   const [status, setStatus] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [imageTour, setImageTour] = useState("");
+  const [imageTour, setImageTour] = useState(null);
   const [cities, setCities] = useState([]);
-  const [selectedCityId, setSelectedCityId] = useState('');
+  const [cityId, setCityId] = useState('');
   const navigate = useNavigate();
-
   useEffect(() => {
     const fetchCities = async () => {
       try {
@@ -27,58 +26,37 @@ function AddTour() {
     fetchCities();
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handlePost = async () => {
+    const formData = new FormData();
+    formData.append('tourName', tourName);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('status', status);
+    formData.append('startDate', startDate);
+    formData.append('endDate', endDate);
+    formData.append('formFile', imageTour); 
+    formData.append('cityId', cityId);
 
-    if (tourName && description && price && status && startDate && endDate && selectedCityId) {
-      const formData = new FormData();
-      formData.append('tourName', tourName);
-      formData.append('description', description);
-      formData.append('price', parseFloat(price));
-      formData.append('status', status);
-      formData.append('startDate', startDate);
-      formData.append('endDate', endDate);
-      formData.append('cityId', selectedCityId);
-
-      // Check if image is uploaded
-      if (imageTour) {
-        console.log('Uploading Image:', imageTour);
-        formData.append('imageTour', imageTour); 
-      } else {
-        console.log('No image uploaded');
-      }
-
-      try {
-        const response = await axios.post('http://localhost:5096/api/Tour', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-        
-     console.log("nghi",formData);
-        console.log('Tour added successfully:', response.data);
-        alert('Tour added successfully!');
-
-        // Reset form fields
-        setTourName('');
-        setDescription('');
-        setPrice('');
-        setStatus('');
-        setStartDate('');
-        setEndDate('');
-        setImageTour(null);
-        setSelectedCityId('');
-        navigate('/admin/tours/all');
-      } catch (error) {
-        console.error('There was an error adding the tour!', error);
-      }
-    } else {
-      alert('Please fill in all fields.');
+    try {
+      const response = await axios.post('http://localhost:5096/api/Tour', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      navigate("/admin/tours/all");
+      console.log('Tour successfully added:', response.data.data);
+    } catch (error) {
+      console.error('Error adding tour:', error);
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handlePost();
+  };
+
   const handleFileChange = (e) => {
-    setImageTour(e.target.files[0].name);
+    setImageTour(e.target.files[0]); 
   };
 
   return (
@@ -97,7 +75,7 @@ function AddTour() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="price">Price (VND)</label>
+          <label htmlFor="price">Price</label>
           <input
             type="number"
             id="price"
@@ -154,19 +132,16 @@ function AddTour() {
         </div>
 
         <div className="form-group">
-          <label>Upload New Image (optional)</label>
-          <input
-            type="file"
-            onChange={handleFileChange}
-          />
+          <label>Upload New Image</label>
+          <input type="file" onChange={handleFileChange} required />
         </div>
 
         <div className="form-group">
           <label htmlFor="city">City</label>
           <select
             id="city"
-            value={selectedCityId}
-            onChange={(e) => setSelectedCityId(e.target.value)}
+            value={cityId}
+            onChange={(e) => setCityId(e.target.value)}
             required
           >
             <option value="">Select City</option>
