@@ -1,8 +1,10 @@
 import Loaing from '@compoents/Loaing';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 
 
 const RegisterUser = ({ email }) => {
+    const navigate = useNavigate(); 
     const [formData, setFormData] = useState({
         name: '',
         password: '',
@@ -24,25 +26,25 @@ const RegisterUser = ({ email }) => {
         const newErrors = {};
         let valid = true;
 
-        // Name validation
+        
         if (!formData.name) {
             newErrors.name = 'Full name is required';
             valid = false;
         }
 
-        // Password validation
+      
         if (!formData.password) {
             newErrors.password = 'Password is required';
             valid = false;
         }
 
-        // Confirm Password validation
+        
         if (formData.password !== formData.confirmPassword) {
             newErrors.confirmPassword = 'Passwords do not match';
             valid = false;
         }
 
-        // Terms validation
+       
         if (!formData.terms) {
             newErrors.terms = 'You must agree to the terms';
             valid = false;
@@ -63,22 +65,26 @@ const RegisterUser = ({ email }) => {
                     name: formData.name,
                     email: email,
                     password: formData.password,
-                    role: 1,
+                    role: "1",
                 }),
             });
-
+    
             if (!response.ok) {
                 throw new Error('Failed to register user');
             }
-
+    
             const data = await response.json();
             console.log(data); // Handle response as needed
             
+           
+            navigate('/login');
+    
         } catch (error) {
             console.error('Error sending request:', error);
             setApiError('Registration failed. Please try again.'); // Set error message
         }
     };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -140,7 +146,7 @@ const RegisterUser = ({ email }) => {
                             <label htmlFor="password" className="text-sm font-semibold text-gray-500">Password</label>
                             <input
                                 type="password"
-                                id="password"
+                                id="password"const
                                 name="password"
                                 value={formData.password}
                                 onChange={handleChange}

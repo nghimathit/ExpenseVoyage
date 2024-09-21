@@ -1,0 +1,47 @@
+.sidebar-admin {
+    width: 250px;
+    height: 100vh;
+    background-color: #0A2558;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+  
+    &__logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+  
+    &__menu {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        margin: 15px 0;
+  
+        a, button {
+          text-decoration: none;
+          color: #fff;
+          font-size: 18px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+          text-align: left;
+          padding: 10px 0;
+          transition: color 0.3s;
+  
+          &:hover {
+            color: #f5a623;
+          }
+        }
+      }
+    }
+  
+    &__submenu {
+      list-style: none;
+      padding-left: 20px;
+    }
+  }
+  

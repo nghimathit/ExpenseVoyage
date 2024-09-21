@@ -1,0 +1,133 @@
+.user-list {
+  margin: 20px auto;
+  max-width: 90%;
+  font-family: 'Arial', sans-serif;
+}
+
+.h1 {
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.user-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-list th, .user-list td {
+  padding: 12px 20px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-list td img {
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+.user-list th {
+  background-color: #0A2558;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.user-list tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.user-list tr:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.user-list td {
+  font-size: 16px;
+  color: #333;
+}
+
+.user-list button {
+  padding: 8px 14px;
+  background-color: #0A2558;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #004080;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(10, 37, 88, 0.5);
+  }
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .user-list table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .user-list th, .user-list td {
+    font-size: 12px;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #0A2558;
+}
+.modal-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details-info {
+  flex: 1; /* Allows this section to grow and take up available space */
+}
+
+.details-avatar {
+  margin-left: 20px; /* Adds some space between the text and the image */
+  text-align: center; /* Center the image */
+}
+
+.details-avatar img {
+  border-radius: 50%; /* Optional: Makes the image round */
+}
+
