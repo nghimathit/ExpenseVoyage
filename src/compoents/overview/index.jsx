@@ -266,7 +266,7 @@ function Overview() {
           </div>
         </div>
       </div>
-      <div className="w-full">
+      {/* <div className="w-full">
         <div className="mb-2 flex justify-between">
           <div className="text-[24px] font-medium">
             <FontAwesomeIcon icon={faChevronDown} className="mr-4" />
@@ -308,7 +308,7 @@ function Overview() {
             })}
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="w-full">
         <div className="grid grid-cols-3 gap-2">
           <div className="col-span-2 mb-3">

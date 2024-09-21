@@ -1,8 +1,9 @@
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { ModalContext } from "@Context/ModalProvider";
+import { Link } from "react-router-dom";
 
 function Sidebar(props) {
   const [datatime, setDatatime] = useState([]);
@@ -46,6 +47,12 @@ function Sidebar(props) {
           <li className="my-2">Notes</li>
           <li className="my-2">Place to visits</li>
         </div>
+        <Link to={'/tour'}>
+        <div className="cursor-pointer rounded-lg my-3 bg-[#212529] p-2 text-[18px] font-extrabold text-[#fff]">
+          <FontAwesomeIcon icon={faChevronRight} />{" "}
+          <span className="pl-2">Tour</span>
+        </div>
+        </Link>
         <div className="cursor-pointer rounded-lg bg-[#212529] p-2 text-[18px] font-extrabold text-[#fff]">
           <FontAwesomeIcon icon={faChevronDown} />{" "}
           <span className="pl-2">Itinerary</span>

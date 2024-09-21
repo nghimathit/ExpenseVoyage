@@ -20,6 +20,7 @@ import AddTour from '@compoents/Admin/AddTour'
 import Edit from '@compoents/Admin/TourList/Edit'
 import TripList from '@compoents/Admin/TripList'
 import ForgotPassword from '@compoents/Login/ForgotPassword'
+import TourView from '@compoents/overview/tour'
 
 
 
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "/forgotpassword",
         element: <ForgotPassword/>
+      },
+      {
+        path: "/tour",
+        element: <TourView />
       },
       {
         path: "/overview/:tripid",
