@@ -1,10 +1,10 @@
 import Loaing from '@compoents/Loaing';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+//import { useNavigate } from 'react-router-dom'; 
 
 
 const RegisterUser = ({ email }) => {
-    const navigate = useNavigate(); 
+    //const navigate = useNavigate(); 
     const [formData, setFormData] = useState({
         name: '',
         password: '',
@@ -77,7 +77,7 @@ const RegisterUser = ({ email }) => {
             console.log(data); // Handle response as needed
             
            
-            navigate('/login');
+            //navigate('/login');
     
         } catch (error) {
             console.error('Error sending request:', error);
