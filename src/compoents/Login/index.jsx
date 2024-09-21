@@ -72,7 +72,7 @@ const Login = () => {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  username: decoded.name,
+                  name: decoded.name,
                   email: decoded.email,
                   password: "aaa",
                   role:"1",
@@ -117,7 +117,8 @@ const Login = () => {
             Role: loginData.data.role,
             avatar: decoded.picture,
           };
-    
+
+   localStorage.setItem('user', JSON.stringify(DataLogin))
     console.log("DataLogin",DataLogin)
         
         
