@@ -28,6 +28,10 @@ function Places({ place, url }) {
   const [tripnote, setTripnote] = useState([]);
   const [tempPrice, setTempPrice] = useState();
   const [image, setImage] = useState(url);
+  const [userid, setUserid] = useState(() => {
+    const storedData = localStorage.getItem('user');
+    return storedData ? JSON.parse(storedData) : null;
+  });
 
   //   useEffect(() => {
   //     axios
@@ -83,7 +87,7 @@ function Places({ place, url }) {
       budget: price,
       startDate: startDate ? dayjs(startDate).format("YYYY-MM-DD") : null,
       endDate: endDate ? dayjs(endDate).format("YYYY-MM-DD") : null,
-      userId: 1,
+      userId: userid.id,
       url: image
     };
     axios

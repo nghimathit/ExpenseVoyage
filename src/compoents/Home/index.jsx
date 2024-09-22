@@ -12,19 +12,25 @@ function HomePage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [rooms, setRooms] = useState(1);
   const [guests, setGuests] = useState(1);
-  const [userid, setUserid] = useState(1);
+  const [userid, setUserid] = useState(() => {
+    const storedData = localStorage.getItem('user');
+    return storedData ? JSON.parse(storedData) : null;
+  });
+
   const [trip, setTrip] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://localhost:5096/api/Trip")
       .then((result) => {
-        console.log(result.data.data.filter((c) => c.userId === userid));
-        const data = result.data.data.filter((c) => c.userId === userid);
+        console.log("data trip", result.data.data.filter((c) => c.userId === userid.id));
+        const data = result.data.data.filter((c) => c.userId === userid.id);
         setTrip(data);
+        console.log(data);
       })
       .catch((err) => console.error(err));
   }, [userid]);
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };

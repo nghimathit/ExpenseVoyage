@@ -16,31 +16,28 @@ const Hearder = () => {
     setTypeCurreny,
     originalMoney,
     setTotalPrice,
-    initialPrice
-    
+    initialPrice,
+    userid,
   } = useContext(ModalContext);
   const [checkPathLogin, setcheckPathLogin] = useState(true);
   //const [userInfo, setUserInfo] = useState({});
   const location = useLocation();
-  
-  const userInfo = JSON.parse(localStorage.getItem('user'));
-  const [userid, setUserid] = useState(() => {
-    const storedData = localStorage.getItem('user');
-    return storedData ? JSON.parse(storedData) : null;
-  });
-  const [user, setUser] = useState({}); 
+
+  const userInfo = JSON.parse(localStorage.getItem("user"));
+
+  const [user, setUser] = useState({});
 
   useEffect(() => {
-    if (userid && userid.Id) {
-      axios.get(`http://localhost:5096/api/User/${userid.Id}`)
-        .then(result => {
+    if (userid) {
+      axios
+        .get(`http://localhost:5096/api/User/${userid.id}`)
+        .then((result) => {
           setUser(result.data.data);
-         
+          console.log("user header", result.data.data);
         })
-        .catch(err => console.error(err));
+        .catch((err) => console.error(err));
     }
   }, [userid]);
-  console.log('userInfo', userInfo);
   useEffect(() => {
     if (location.pathname === "/login" || location.pathname === "/register") {
       setcheckPathLogin(false);
@@ -67,9 +64,9 @@ const Hearder = () => {
       setTypeCurreny("$");
       setTotalPrice(initialPrice);
     }
-    console.log(selectedCurrency)
+    console.log(selectedCurrency);
   };
-  
+
   return (
     <div>
       <header className="wrapper">
@@ -80,11 +77,14 @@ const Hearder = () => {
         </Link>
         <div className="inner-flex">
           <div className="menu">
-            <Link to={"home"}>
+            <Link to={"/home"}>
               <li className="list">Home</li>
             </Link>
-            <Link to={"overview"}>
+            <Link to={"/overview"}>
               <li className="list">Overview</li>
+            </Link>
+            <Link to={"/tour"}>
+              <li className="list">Tour</li>
             </Link>
           </div>
 
@@ -98,44 +98,50 @@ const Hearder = () => {
               </select>
             </div>
             {userInfo ? (
-              <div className="avatar-username">
-              <div className="circle">
-                <div className="avatar">
-                  <img
-                    src='https://zpsocial2-f7-org.zadn.vn/677ef46d4c81acdff590.jpg'
-                    alt=""
-                  />
+              <div className="avatar-username relative">
+                <div className="circle">
+                  <div className="avatar">
+                    <img
+                      src="https://zpsocial2-f7-org.zadn.vn/677ef46d4c81acdff590.jpg"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div className="username flex items-center justify-center whitespace-nowrap">
+                  {" "}
+                  <span className="mr-1">Welcome</span> {user.name}
                 </div>
               </div>
-              <div className="username">{user?user.name:'Hello'}</div>
-            </div>
             ) : (
-              <Link to={'/login'}>
-              <div
-                className="login"
-                // onClick={() => {
-                //   if (checkPathLogin) {
-                //     setisShow(true);
-                //     setContent(<Login />);
-                //   }
-                // }}
-              >
-                <button className="w-full">Login</button>
-              </div>
+              <Link to={"/login"}>
+                <div
+                  className="login"
+                  // onClick={() => {
+                  //   if (checkPathLogin) {
+                  //     setisShow(true);
+                  //     setContent(<Login />);
+                  //   }
+                  // }}
+                >
+                  <button className="w-full">Login</button>
+                </div>
               </Link>
             )}
-           {userInfo ? <Fragment /> :  <div
-              className="register"
-              onClick={() => {
-                if (checkPathLogin) {
-                  setisShow(true);
-                  setContent(<Register />);
-                }
-              }}
-            >
-              <button>Register</button>
-            </div>}
-            
+            {userInfo ? (
+              <Fragment />
+            ) : (
+              <div
+                className="register"
+                onClick={() => {
+                  if (checkPathLogin) {
+                    setisShow(true);
+                    setContent(<Register />);
+                  }
+                }}
+              >
+                <button>Register</button>
+              </div>
+            )}
           </div>
         </div>
       </header>

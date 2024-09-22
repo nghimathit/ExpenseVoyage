@@ -32,10 +32,16 @@ const ModalProvider = ({ children }) => {
       document.body.style.overflow = "scroll";
     }
   }, [isShow]);
+  const [userid, setUserid] = useState(() => {
+    const storedData = localStorage.getItem('user');
+    return storedData ? JSON.parse(storedData) : null;
+  });
   return (
     <ModalContext.Provider
       value={{
         setisShow,
+        userid,
+        setUserid,
         setContent,
         startDate,
         endDate,

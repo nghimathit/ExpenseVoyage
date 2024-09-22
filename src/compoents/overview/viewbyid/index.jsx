@@ -555,7 +555,7 @@ function Viewbyid() {
                 <div className="h-60 w-full">
                   <img
                     className="h-full w-full rounded-xl object-cover"
-                    src={typeof image === "string" ? image : image.preview}
+                    src={tripdata.url}
                     alt=""
                   />
                 </div>
