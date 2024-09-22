@@ -12,8 +12,8 @@ const Dashboard = () => {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     datasets: [
       {
-        label: 'Earnings (VND)',
-        data: [1200000, 2100000, 1500000, 2800000, 2200000, 2500000, 2700000, 3000000, 3500000, 3200000, 3800000, 4000000],
+        label: 'Earnings (USD)',
+        data: [12000, 21000, 15000, 28000, 22000, 25000, 27000, 30000, 35000, 32000, 38000, 40000],
         backgroundColor: '#0A2558',
       },
     ],
@@ -66,22 +66,25 @@ const Dashboard = () => {
           <div className="dashboard__icon-wrapper">
             <i className="bi bi-currency-dollar dashboard__icon"></i>
           </div>
-        
-          <p className="txt">VND 40,000,000</p>
-        </div>
+          
+          <p className="txt">35,000 USD</p>
+          <p className="txt-name">Money This Month</p>
+        </div>  
         <div className="dashboard__card">
           <div className="dashboard__icon-wrapper">
             <i className="bi bi-people dashboard__icon"></i>
           </div>
         
           <p className="txt">{user.length}</p>
+          <p className="txt-name">Users</p>
         </div>
         <div className="dashboard__card">
           <div className="dashboard__icon-wrapper">
           <i className="bi bi-backpack2-fill"></i>
           </div>
-        
+          
           <p className="txt">{trip.length}</p>
+          <p className="txt-name">Trips</p>
         </div>
         <div className="dashboard__card">
           <div className="dashboard__icon-wrapper">
@@ -89,6 +92,7 @@ const Dashboard = () => {
           </div>
        
           <p className="txt">{tour.length}</p>
+          <p className="txt-name">Tours</p>
         </div>
       </div>
     

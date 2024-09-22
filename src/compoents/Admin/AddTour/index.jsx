@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AddTour.scss';
 import { useNavigate } from 'react-router-dom';
-
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 function AddTour() {
   const [tourName, setTourName] = useState('');
   const [description, setDescription] = useState('');
@@ -12,8 +13,14 @@ function AddTour() {
   const [endDate, setEndDate] = useState('');
   const [imageTour, setImageTour] = useState(null);
   const [cities, setCities] = useState([]);
+  const [country,setCountry] = useState('');
   const [cityId, setCityId] = useState('');
   const navigate = useNavigate();
+  useEffect(() =>{
+    axios.get('http://localhost:5096/api/country')
+    .then(result => setCountry(result.data.data))
+    .catch(error => console.error(error));
+  })
   useEffect(() => {
     const fetchCities = async () => {
       try {
@@ -49,7 +56,15 @@ function AddTour() {
       console.error('Error adding tour:', error);
     }
   };
-
+  
+  // const handleCountry = (e) =>{
+  //   axios.get('http://localhost:5096/api/city')
+  //   .then(result => {
+  //     const a = result.data.data;
+  //     const b = a.filter(c => c.countryId).some(c=> c.countryId === c.id)
+  //     console.log
+  //   }).catch(error => console.log(error));
+  // }
   const handleSubmit = (e) => {
     e.preventDefault();
     handlePost();
@@ -87,11 +102,14 @@ function AddTour() {
 
         <div className="form-group">
           <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
+          {/* Thay textarea bằng CKEditor */}
+          <CKEditor
+            editor={ClassicEditor}
+            data={description}
+            onChange={(event, editor) => {
+              const data = editor.getData();
+              setDescription(data);
+            }}
           />
         </div>
 
@@ -136,6 +154,22 @@ function AddTour() {
           <input type="file" onChange={handleFileChange} required />
         </div>
 
+        {/* <div className="form-group">
+          <label htmlFor="country">Country</label>
+          <select
+            id="country"
+            value={cityId}
+            onChange={(e) => setCityId(e.target.value)}
+            required
+          >
+            <option value="">Select Country</option>
+            {country.map((city) => (
+              <option key={city.id} value={city.id}>
+                {city.countryName}
+              </option>
+            ))}
+          </select>
+        </div> */}
         <div className="form-group">
           <label htmlFor="city">City</label>
           <select

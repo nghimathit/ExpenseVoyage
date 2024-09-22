@@ -1,20 +1,33 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "E:\\Techwich\\ExpenseVoyage\\ExpenseVoyage\\ExpenseVoyage.csproj": {}
+=======
+    "C:\\Users\\PC\\Desktop\\reatjs\\thumuctechwiz\\ExpenseVoyage\\ExpenseVoyage\\ExpenseVoyage.csproj": {}
+>>>>>>> e7ae25b6958270081922d54a6c93a92df48affbf
   },
   "projects": {
-    "E:\\Techwich\\ExpenseVoyage\\ExpenseVoyage\\ExpenseVoyage.csproj": {
+    "C:\\Users\\PC\\Desktop\\reatjs\\thumuctechwiz\\ExpenseVoyage\\ExpenseVoyage\\ExpenseVoyage.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Techwich\\ExpenseVoyage\\ExpenseVoyage\\ExpenseVoyage.csproj",
+        "projectUniqueName": "C:\\Users\\PC\\Desktop\\reatjs\\thumuctechwiz\\ExpenseVoyage\\ExpenseVoyage\\ExpenseVoyage.csproj",
         "projectName": "ExpenseVoyage",
+<<<<<<< HEAD
         "projectPath": "E:\\Techwich\\ExpenseVoyage\\ExpenseVoyage\\ExpenseVoyage.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
         "outputPath": "E:\\Techwich\\ExpenseVoyage\\ExpenseVoyage\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "projectPath": "C:\\Users\\PC\\Desktop\\reatjs\\thumuctechwiz\\ExpenseVoyage\\ExpenseVoyage\\ExpenseVoyage.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC\\Desktop\\reatjs\\thumuctechwiz\\ExpenseVoyage\\ExpenseVoyage\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> e7ae25b6958270081922d54a6c93a92df48affbf
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,6 +80,7 @@
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
+<<<<<<< HEAD
               "version": "[7.0.14, 7.0.14]"
             },
             {
@@ -76,6 +90,17 @@
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
               "version": "[7.0.14, 7.0.14]"
+=======
+              "version": "[7.0.18, 7.0.18]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[7.0.18, 7.0.18]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[7.0.18, 7.0.18]"
+>>>>>>> e7ae25b6958270081922d54a6c93a92df48affbf
             }
           ],
           "frameworkReferences": {
@@ -86,7 +111,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+>>>>>>> e7ae25b6958270081922d54a6c93a92df48affbf
         }
       }
     }

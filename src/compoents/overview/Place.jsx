@@ -15,7 +15,7 @@ import { ModalContext } from "@Context/ModalProvider";
 import dayjs from "dayjs";
 
 function Places({ place, url }) {
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const {
     startDate,
     endDate,
@@ -56,10 +56,10 @@ function Places({ place, url }) {
   };
 
   useEffect(() => {
-    if (onPriceChange) {
+    
       setTotalPrice(Number(onPriceChange)); 
-    }
-  }, [onPriceChange]);
+    
+  }, [tempPrice]);
   const togglePopup = () => {
     const popup = document.getElementById(`${place}-id`);
     if (popup) {
@@ -95,14 +95,15 @@ function Places({ place, url }) {
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
   };
+  
   const handleChange = (e) => {
     setTempPrice(e.target.value);
   };
   const handleSave = () => {
     setPrice(tempPrice);
-    setonPriceChange(Number(tempPrice));
+    setTotalPrice(Number(tempPrice));
 
-    setInitialPrice(tempPrice);
+    setInitialPrice(Number(tempPrice));
     togglePopup();
   };
   useEffect(() =>{

@@ -64,6 +64,12 @@ function Viewbyid() {
   const [top100Films, settop100Films] = useState([]);
 
   const [destination, setDestination] = useState([]);
+  const [tour,setTour] = useState([]);
+  useEffect(()=>{
+    axios.get('http://localhost:5096/api/Tour')
+    .then(response => setTour(response.data.data))
+    .catch(error => console.log(error));
+  }, [])
   const {
     setStartDate,
     setEndDate,
@@ -117,6 +123,9 @@ function Viewbyid() {
         .then((result) => {
           console.log(result.data.data);
           setTripdata(result.data.data);
+          setStartDate(result.data.data.startDate)
+          setEndDate(result.data.data.endDate)
+          
         })
         .catch((err) => console.error(err));
     }
@@ -239,14 +248,14 @@ function Viewbyid() {
     console.log(endDate ? dayjs(endDate).format("YYYY-MM-DD") : null);
   }, [startDate, endDate]);
   const togglePopup = () => {
-    const popup = document.getElementById(`${places}-id`);
+    const popup = document.getElementById(`${tripdata.destination}-id`);
     if (popup) {
       popup.classList.toggle("block");
       popup.style.display = popup.style.display === "none" ? "block" : "none";
     }
   };
-  const togglePopupSave = (place) => {
-    const popup = document.getElementById(`${place}`);
+  const togglePopupSave = () => {
+    const popup = document.getElementById(`${tripdata.destination}`);
     if (popup) {
       popup.classList.toggle("block");
       popup.style.display = popup.style.display === "none" ? "block" : "none";
@@ -301,7 +310,7 @@ function Viewbyid() {
         <div className="flex justify-center">
           <div className="absolute bottom-0 mb-4 w-10/12 flex-col items-center justify-center rounded-lg bg-white p-4 shadow-lg">
             <span className="mb-3 block w-full text-[28px] font-semibold">
-              Trip to {countries}
+              Trip to {tripdata.destination}
             </span>
             <span className="">
               <Space
@@ -335,7 +344,7 @@ function Viewbyid() {
         </div>
         <div className="swiper mb-4 w-full" ref={swiperRef}>
           <div className="swiper-wrapper">
-            {fakedata.map((item, index) => {
+            {tour.map((tours, index) => {
               return (
                 <div
                   className="swiper-slide w-44 rounded-xl bg-gray-50 shadow-md"
@@ -343,25 +352,18 @@ function Viewbyid() {
                 >
                   <div className="h-28 w-full overflow-hidden">
                     <img
-                      src="https://plus.unsplash.com/premium_photo-1690960644830-487c569ca6fa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGhvJTIwY2hpJTIwbWluaHxlbnwwfHwwfHx8MA%3D%3D"
+                      src={tours.imageTour}
                       className="scale-image h-full w-full rounded-lg object-cover"
                       alt="ho chi minh"
                     />
                   </div>
                   <div className="p-2">
                     <span className="two-lines mb-2 text-[18px]">
-                      Top places for Vietnam
+                    {tours.description}
                     </span>
                     <div className="flex gap-2">
-                      <div className="mb-2 h-6 w-6">
-                        <img
-                          src="https://zpsocial2-f14-org.zadn.vn/3f7dafff5d1abd44e40b.jpg"
-                          alt=""
-                          className="rounded-full"
-                        />
-                      </div>
                       <span className="text-[12px] text-[#6c757d]">
-                        Cho in yeong
+                        {tours.tourName}
                       </span>
                     </div>
                   </div>
@@ -452,7 +454,7 @@ function Viewbyid() {
                 <FontAwesomeIcon icon={faEllipsis} />
                 <div
                   className="absolute right-0 top-[25px] hidden w-28 rounded-xl border-[1px] border-solid border-[#f3f4f5] bg-[#fff] shadow-xl"
-                  id={`${tripdata}`}
+                  id={`${tripdata.destination}`}
                 >
                   <button
                     type="submit"
@@ -518,7 +520,7 @@ function Viewbyid() {
                       </div>
                     )}
                     <div
-                      id={`${tripdata}-id`}
+                      id={`${tripdata.destination}-id`}
                       className="absolute left-0 top-full z-10 mt-2 hidden w-48 rounded-lg bg-white p-2 shadow-lg"
                     >
                       <div className="w-full border-[1px] border-solid border-[#f3f4f5]">

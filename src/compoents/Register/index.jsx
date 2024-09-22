@@ -15,9 +15,9 @@ const Register = () => {
         setErrors({ ...errors, [name]: '' }); // Clear error on change
     };
 
+    let valid = true;
+    const newErrors = { email: '' };
     const validateForm = () => {
-        let valid = true;
-        const newErrors = { email: '' };
 
         // Email validation
         if (!formData.email) {
@@ -44,6 +44,9 @@ const Register = () => {
             });
 
             if (!response.ok) {
+                const data = await response.json();
+                newErrors.email = data.message;
+                console.log(data.message); // Handle response as needed
                 throw new Error('Failed to send OTP');
             }
 

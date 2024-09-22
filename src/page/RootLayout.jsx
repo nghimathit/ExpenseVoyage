@@ -13,7 +13,7 @@ const RootLayout = () => {
       <div className="container m-0 p-0">
         <Hearder /> {/* Các component chung */}
         <div className="hiddenclass"></div>
-        {location.pathname === "/overview" || location.pathname.startsWith("/overview/") ? <Sidebar /> : null}
+        {location.pathname.startsWith("/tour") || location.pathname.startsWith("/overview") ? <Sidebar /> : null}
         </div>
       <div className="container">
         <Outlet /> {/* Các component ở giữa */}
