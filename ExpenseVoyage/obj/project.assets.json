@@ -469,16 +469,11 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\Admin\\.nuget\\packages\\": {}
-=======
-    "C:\\Users\\PC\\.nuget\\packages\\": {}
->>>>>>> 95e589c30df5cb3928cf1fa99105dd3e22734555
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "E:\\Techwich\\ExpenseVoyage\\ExpenseVoyage\\ExpenseVoyage.csproj",
       "projectName": "ExpenseVoyage",
       "projectPath": "E:\\Techwich\\ExpenseVoyage\\ExpenseVoyage\\ExpenseVoyage.csproj",
@@ -487,16 +482,6 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-      "projectUniqueName": "C:\\Users\\PC\\Desktop\\reatjs\\techwiz\\ExpenseVoyage\\ExpenseVoyage\\ExpenseVoyage.csproj",
-      "projectName": "ExpenseVoyage",
-      "projectPath": "C:\\Users\\PC\\Desktop\\reatjs\\techwiz\\ExpenseVoyage\\ExpenseVoyage\\ExpenseVoyage.csproj",
-      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\Desktop\\reatjs\\techwiz\\ExpenseVoyage\\ExpenseVoyage\\obj\\",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 95e589c30df5cb3928cf1fa99105dd3e22734555
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -516,11 +501,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -550,11 +530,10 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[7.0.18, 7.0.18]"
+            "version": "[7.0.14, 7.0.14]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-<<<<<<< HEAD
             "version": "[7.0.14, 7.0.14]"
           },
           {
@@ -564,17 +543,6 @@
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
             "version": "[7.0.14, 7.0.14]"
-=======
-            "version": "[7.0.18, 7.0.18]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[7.0.18, 7.0.18]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[7.0.18, 7.0.18]"
->>>>>>> 95e589c30df5cb3928cf1fa99105dd3e22734555
           }
         ],
         "frameworkReferences": {
@@ -585,12 +553,16 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
->>>>>>> 95e589c30df5cb3928cf1fa99105dd3e22734555
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file E:\\Techwich\\ExpenseVoyage\\ExpenseVoyage\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
