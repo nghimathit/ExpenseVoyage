@@ -84,7 +84,8 @@ function TourList() {
               <div className="modal-details">
                 <div className="modal-info">
                   <p><strong>Tour Name:</strong> {selectedTour.tourName}</p>
-                  <p className="description"><strong>Description:</strong> {selectedTour.description}</p>
+                  <p className="description"><strong>Description:</strong>
+                   <span dangerouslySetInnerHTML={{ __html: selectedTour.description }}></span></p>
                   <p><strong>Start Date:</strong> {selectedTour.startDate}</p>
                   <p><strong>End Date:</strong> {selectedTour.endDate}</p>
                   <p><strong>Price (VND):</strong> {selectedTour.price.toLocaleString()}</p>
