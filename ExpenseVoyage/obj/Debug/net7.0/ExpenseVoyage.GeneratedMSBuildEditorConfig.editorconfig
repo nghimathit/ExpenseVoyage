@@ -9,11 +9,19 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ExpenseVoyage
 build_property.RootNamespace = ExpenseVoyage
+<<<<<<< HEAD
+build_property.ProjectDir = E:\Techwich\ExpenseVoyage\ExpenseVoyage\
+=======
 build_property.ProjectDir = C:\Users\PC\Desktop\reatjs\thumuctechwiz\ExpenseVoyage\ExpenseVoyage\
+>>>>>>> e7ae25b6958270081922d54a6c93a92df48affbf
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+<<<<<<< HEAD
+build_property.MSBuildProjectDirectory = E:\Techwich\ExpenseVoyage\ExpenseVoyage
+=======
 build_property.MSBuildProjectDirectory = C:\Users\PC\Desktop\reatjs\thumuctechwiz\ExpenseVoyage\ExpenseVoyage
+>>>>>>> e7ae25b6958270081922d54a6c93a92df48affbf
 build_property._RazorSourceGeneratorDebug = 

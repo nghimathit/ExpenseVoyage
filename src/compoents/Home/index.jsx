@@ -23,8 +23,8 @@ function HomePage() {
     axios
       .get("http://localhost:5096/api/Trip")
       .then((result) => {
-        console.log("data trip", result.data.data.filter((c) => c.userId === userid.id));
-        const data = result.data.data.filter((c) => c.userId === userid.id);
+        console.log("data trip", result.data.data.filter((c) => c.userId === userid.data.id));
+        const data = result.data.data.filter((c) => c.userId === userid.data.id);
         setTrip(data);
         console.log(data);
       })

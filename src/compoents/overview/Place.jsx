@@ -87,7 +87,7 @@ function Places({ place, url }) {
       budget: price,
       startDate: startDate ? dayjs(startDate).format("YYYY-MM-DD") : null,
       endDate: endDate ? dayjs(endDate).format("YYYY-MM-DD") : null,
-      userId: userid.id,
+      userId: userid.data.id,
       url: image
     };
     axios

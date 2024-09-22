@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import './Edit.scss';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 function Edit() {
   const { id } = useParams();
@@ -83,15 +85,18 @@ function Edit() {
             required
           />
         </div>
-        <div className="form-group">
-          <label>Description</label>
-          <textarea
-            name="description"
-            value={tour.description}
-            onChange={handleChange}
-            required
-          />
-        </div>
+       
+        <CKEditor
+    editor={ClassicEditor}
+    data={tour.description} 
+    onChange={(event, editor) => {
+      const data = editor.getData(); 
+      setTour((prevState) => ({
+        ...prevState,
+        description: data, 
+      }));
+    }}
+  />
         <div className="form-group">
           <label htmlFor="status">Status</label>
           <select

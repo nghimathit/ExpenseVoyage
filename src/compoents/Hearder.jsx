@@ -30,7 +30,7 @@ const Hearder = () => {
   useEffect(() => {
     if (userid) {
       axios
-        .get(`http://localhost:5096/api/User/${userid.id}`)
+        .get(`http://localhost:5096/api/User/${userid.data.id}`)
         .then((result) => {
           setUser(result.data.data);
           console.log("user header", result.data.data);

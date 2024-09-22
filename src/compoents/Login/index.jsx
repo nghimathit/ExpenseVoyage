@@ -32,6 +32,8 @@ const Login = () => {
       const data = await response.json();
       // Handle successful login (e.g., store token, redirect, etc.)
       console.log("Login successful!", data);
+      localStorage.setItem("user", JSON.stringify(data));
+
     } catch (error) {
       setError(error.message);
     } finally {
